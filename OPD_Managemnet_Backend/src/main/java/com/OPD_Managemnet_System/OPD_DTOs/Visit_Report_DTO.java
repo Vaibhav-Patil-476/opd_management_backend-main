@@ -24,7 +24,7 @@ public class Visit_Report_DTO {
 
 	@NotNull(message = "Visit ID is required")
 	@Positive(message = "Visit ID must be a positive number")
-	private Integer visitid;
+	private int visitid;
 
 //	public String getFile_name() {
 //		return file_name;
@@ -58,11 +58,11 @@ public class Visit_Report_DTO {
 //		this.created_at = created_at;
 //	}
 
-	public Integer getVisitid() {
+	public int getVisitid() {
 		return visitid;
 	}
 
-	public void setVisitid(Integer visitid) {
+	public void setVisitid(int visitid) {
 		this.visitid = visitid;
 	}
 

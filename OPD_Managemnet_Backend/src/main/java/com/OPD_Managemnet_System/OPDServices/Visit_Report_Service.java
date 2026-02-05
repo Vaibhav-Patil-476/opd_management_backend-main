@@ -3,9 +3,9 @@ package com.OPD_Managemnet_System.OPDServices;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.core.io.Resource;
 import com.OPD_Managemnet_System.OPDEntitys.Visit_Report;
-import com.OPD_Managemnet_System.Response.DoctorResponce;
+
 
 public interface Visit_Report_Service {
 
