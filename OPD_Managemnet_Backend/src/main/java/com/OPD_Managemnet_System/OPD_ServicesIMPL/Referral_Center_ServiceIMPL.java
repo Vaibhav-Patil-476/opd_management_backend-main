@@ -13,44 +13,46 @@ import com.OPD_Managemnet_System.OPDRepo.Referral_Center_Repo;
 import com.OPD_Managemnet_System.OPDServices.Referral_Center_Service;
 
 @Service
-public class Referral_Center_ServiceIMPL implements Referral_Center_Service{
+public class Referral_Center_ServiceIMPL implements Referral_Center_Service {
 
 	@Autowired
 	private Referral_Center_Repo referral_Center_Repo;
+
 	@Override
 	public Referral_Center save(Referral_Center referral_Center) {
 		try {
-			return referral_Center_Repo.save(referral_Center);
+			return referral_Center_Repo.save(referral_Center);// repository method
 		} catch (Exception e) {
 			throw new DatabaseException("Internal server Error...!");
 		}
-		
+
 	}
 
 	@Override
 	public List<Referral_Center> GetAllMedicine() {
 		try {
-			return referral_Center_Repo.findAll();
+			return referral_Center_Repo.findAll();// repository method
 		} catch (Exception e) {
 			throw new ResourceNotFoundException("Referral_Center list not exists....!");
 		}
-		
+
 	}
 
 	@Override
 	public Referral_Center GetReferral_CenterById(int id) {
-		
-		return referral_Center_Repo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Referral_Center not exists by this id....!"+id));
+
+		return referral_Center_Repo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Referral_Center not exists by this id....!" + id));
 	}
 
 	@Override
 	public void deleteById(int id) {
 		try {
-			referral_Center_Repo.deleteById(id);
+			referral_Center_Repo.deleteById(id);// repository method
 		} catch (Exception e) {
 			throw new ResourceNotFoundException("Referral_Center not exists by id...!");
 		}
-		
+
 	}
 
 }

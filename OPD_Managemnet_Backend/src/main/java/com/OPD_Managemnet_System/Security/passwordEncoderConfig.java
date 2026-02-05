@@ -9,9 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class passwordEncoderConfig {
 
 	@Bean
-	//call in controller and doctor controller 
+	// call in controller and doctor controller
 	public PasswordEncoder passwordEncoder() {
-		
+
 		return new BCryptPasswordEncoder();
 	}
 }

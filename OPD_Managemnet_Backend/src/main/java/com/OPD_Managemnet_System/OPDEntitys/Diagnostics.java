@@ -8,29 +8,32 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+//Entity class representing database table for OPD management
+
 @Entity
 @Table(name = "Diagnostics")
 public class Diagnostics {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	// It uniquely identifies each record in the database table.
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
+	private String name;
 
-    private String name;
+	private LocalDateTime createdAt;
 
+	// Apply Many to One Relationship between the Diagnostics and visit
+	@ManyToOne
+	@JoinColumn(name = "visitid")
+	@JsonIgnoreProperties(value = { "visitid" }, allowSetters = true)
+	private Visit visitid;
 
-    private LocalDateTime createdAt;
-
-    @ManyToOne
-    @JoinColumn(name = "visitid")
-    @JsonIgnoreProperties(value = {"visitid"}, allowSetters = true)
-    private Visit visitid;
-
-    @ManyToOne
-    @JoinColumn(name = "doctorid")
-    @JsonIgnoreProperties(value = {"doctorid"}, allowSetters = true)
-    private Doctor doctorid;
+	// Apply Many to One Relationship between the Diagnostics and Doctor
+	@ManyToOne
+	@JoinColumn(name = "doctorid")
+	@JsonIgnoreProperties(value = { "doctorid" }, allowSetters = true)
+	private Doctor doctorid;
 
 	public int getId() {
 		return id;
@@ -93,5 +96,4 @@ public class Diagnostics {
 		// TODO Auto-generated constructor stub
 	}
 
-   
 }

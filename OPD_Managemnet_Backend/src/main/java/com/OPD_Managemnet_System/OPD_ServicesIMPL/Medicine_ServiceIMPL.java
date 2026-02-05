@@ -16,40 +16,41 @@ public class Medicine_ServiceIMPL implements Medicine_Service {
 
 	@Autowired
 	private Medicine_Repo medicine_Repo;
-	
+
 	@Override
 	public Medicine save(Medicine medicine) {
-	try {
-		return medicine_Repo.save(medicine);
-	} catch (Exception e) {
-		throw new DatabaseException("Database Internal Error...!");
-	}
+		try {
+			return medicine_Repo.save(medicine);// repository method
+		} catch (Exception e) {
+			throw new DatabaseException("Database Internal Error...!");
+		}
 	}
 
 	@Override
 	public List<Medicine> GetAllMedicine() {
 		try {
-			return medicine_Repo.findAll();
+			return medicine_Repo.findAll();// repository method
 		} catch (Exception e) {
 			throw new ResourceNotFoundException("medicine List not exists...!");
 		}
-		
+
 	}
 
 	@Override
 	public Medicine GetMedicineById(int id) {
-	
-		return medicine_Repo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Medicine Not exists with this id....!"+id));
+
+		return medicine_Repo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Medicine Not exists with this id....!" + id));
 	}
 
 	@Override
 	public void deleteById(int id) {
 		try {
-			medicine_Repo.deleteById(id);
+			medicine_Repo.deleteById(id);// repository method
 		} catch (Exception e) {
-			throw new ResourceNotFoundException("Medicine Not exists by this id....!"+id);
+			throw new ResourceNotFoundException("Medicine Not exists by this id....!" + id);
 		}
-		
+
 	}
 
 }

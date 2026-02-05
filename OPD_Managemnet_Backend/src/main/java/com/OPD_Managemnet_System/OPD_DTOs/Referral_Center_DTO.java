@@ -11,29 +11,28 @@ import jakarta.validation.constraints.Positive;
 
 public class Referral_Center_DTO {
 
+	@NotBlank(message = "Name is required")
+	private String name;
 
-@NotBlank(message = "Name is required")
-private String name;
+	@NotBlank(message = "Type is required")
+	private String type;
 
-@NotBlank(message = "Type is required")
-private String type;
+	@NotNull(message = "Contact info is required")
+	@Min(value = 1000000000, message = "Contact info must be 10 digits")
+	@Max(value = 9999999999L, message = "Contact info must be 10 digits")
+	private int contact_info;
 
-@NotNull(message = "Contact info is required")
-@Min(value = 1000000000, message = "Contact info must be 10 digits")
-@Max(value = 9999999999L, message = "Contact info must be 10 digits")
-private int contact_info;
+	@NotBlank(message = "Address is required")
+	private String address;
 
-@NotBlank(message = "Address is required")
-private String address;
+	@NotNull(message = "Created date is required")
+	private LocalDateTime created_at;
 
-@NotNull(message = "Created date is required")
-private LocalDateTime created_at;
+	@NotNull(message = "Doctor ID is required")
+	@Positive(message = "Doctor ID must be a positive number")
+	private int docterid;
 
-@NotNull(message = "Doctor ID is required")
-@Positive(message = "Doctor ID must be a positive number")
-private int docterid;
-
-	//Genarate Getter Setter for Store temp Data 
+	// Genarate Getter Setter for Store temp Data
 	public String getName() {
 		return name;
 	}
@@ -81,6 +80,5 @@ private int docterid;
 	public void setDocterid(int docterid) {
 		this.docterid = docterid;
 	}
-	
-	
+
 }

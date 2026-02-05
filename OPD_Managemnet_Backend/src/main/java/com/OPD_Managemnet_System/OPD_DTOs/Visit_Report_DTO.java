@@ -10,54 +10,60 @@ import jakarta.validation.constraints.Positive;
 
 public class Visit_Report_DTO {
 
+//	@NotBlank(message = "File name is required")
+//	private String file_name;
+//
+//	
+//	private String file_url;
+//
+//	@NotBlank(message = "File type is required")
+//	private String file_type;
+//
+//	@NotNull(message = "Created date is required")
+//	private LocalDateTime created_at;
 
-@NotBlank(message = "File name is required")
-private String file_name;
+	@NotNull(message = "Visit ID is required")
+	@Positive(message = "Visit ID must be a positive number")
+	private Integer visitid;
 
-@NotBlank(message = "File URL is required")
-@Pattern(regexp = "^(http|https)://.*$", message = "File URL must be a valid URL")
-private String file_url;
+//	public String getFile_name() {
+//		return file_name;
+//	}
+//
+//	public void setFile_name(String file_name) {
+//		this.file_name = file_name;
+//	}
+//
+//	public String getFile_url() {
+//		return file_url;
+//	}
+//
+//	public void setFile_url(String file_url) {
+//		this.file_url = file_url;
+//	}
+//
+//	public String getFile_type() {
+//		return file_type;
+//	}
+//
+//	public void setFile_type(String file_type) {
+//		this.file_type = file_type;
+//	}
+//
+//	public LocalDateTime getCreated_at() {
+//		return created_at;
+//	}
+//
+//	public void setCreated_at(LocalDateTime created_at) {
+//		this.created_at = created_at;
+//	}
 
-@NotBlank(message = "File type is required")
-private String file_type;
-
-@NotNull(message = "Created date is required")
-private LocalDateTime created_at;
-
-@NotNull(message = "Visit ID is required")
-@Positive(message = "Visit ID must be a positive number")
-private int visitid;
-
-	public String getFile_name() {
-		return file_name;
-	}
-	public void setFile_name(String file_name) {
-		this.file_name = file_name;
-	}
-	public String getFile_url() {
-		return file_url;
-	}
-	public void setFile_url(String file_url) {
-		this.file_url = file_url;
-	}
-	public String getFile_type() {
-		return file_type;
-	}
-	public void setFile_type(String file_type) {
-		this.file_type = file_type;
-	}
-	public LocalDateTime getCreated_at() {
-		return created_at;
-	}
-	public void setCreated_at(LocalDateTime created_at) {
-		this.created_at = LocalDateTime.now();
-	}
-	public int getVisitid() {
+	public Integer getVisitid() {
 		return visitid;
 	}
-	public void setVsitid(int visitid) {
+
+	public void setVisitid(Integer visitid) {
 		this.visitid = visitid;
 	}
-	
-	
+
 }

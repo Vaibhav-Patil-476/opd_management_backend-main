@@ -12,45 +12,46 @@ import com.OPD_Managemnet_System.OPDRepo.Pathology_Test_Repo;
 import com.OPD_Managemnet_System.OPDServices.Pathology_Test_Service;
 
 @Service
-public class Pathology_Test_ServiceIMPL implements Pathology_Test_Service{
+public class Pathology_Test_ServiceIMPL implements Pathology_Test_Service {
 
 	@Autowired
 	private Pathology_Test_Repo pathology_Test_Repo;
-	
+
 	@Override
 	public Pathology_Test save(Pathology_Test pathology_Test) {
 		try {
-			return pathology_Test_Repo.save(pathology_Test);
+			return pathology_Test_Repo.save(pathology_Test);// repository method
 		} catch (Exception e) {
 			throw new DatabaseException("Internal Server Exception....!");
 		}
-		
+
 	}
 
 	@Override
 	public List<Pathology_Test> getAllPathology_Tests() {
 		try {
-			return pathology_Test_Repo.findAll();
+			return pathology_Test_Repo.findAll();// repository method
 		} catch (Exception e) {
 			throw new ResourceNotFoundException("Pathology_Test list not exist...!");
 		}
-		
+
 	}
 
 	@Override
 	public Pathology_Test getPathology_TestById(int id) {
-		
-		return pathology_Test_Repo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Pathology_Test not exists by id....!"+id));
+
+		return pathology_Test_Repo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Pathology_Test not exists by id....!" + id));
 	}
 
 	@Override
 	public void DeletePathology_TestById(int id) {
 		try {
-			pathology_Test_Repo.deleteById(id);
+			pathology_Test_Repo.deleteById(id);// repository method
 		} catch (Exception e) {
-			throw new ResourceNotFoundException("Pathology_Test not exists by this id.....!"+id);
+			throw new ResourceNotFoundException("Pathology_Test not exists by this id.....!" + id);
 		}
-		
+
 	}
 
 }

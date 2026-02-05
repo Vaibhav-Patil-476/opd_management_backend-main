@@ -6,19 +6,18 @@ import jakarta.validation.constraints.Positive;
 
 public class Test_Master_DTO {
 
+	@NotBlank(message = "Test name is required")
+	private String test_name;
 
-@NotBlank(message = "Test name is required")
-private String test_name;
+	@NotBlank(message = "Normal range is required")
+	private String normal_range;
 
-@NotBlank(message = "Normal range is required")
-private String normal_range;
+	@NotBlank(message = "Unit is required")
+	private String unit;
 
-@NotBlank(message = "Unit is required")
-private String unit;
-
-@NotNull(message = "Doctor ID is required")
-@Positive(message = "Doctor ID must be a positive number")
-private int docterid;
+	@NotNull(message = "Doctor ID is required")
+	@Positive(message = "Doctor ID must be a positive number")
+	private int docterid;
 
 	public String getTest_name() {
 		return test_name;
@@ -51,6 +50,5 @@ private int docterid;
 	public void setDocterid(int docterid) {
 		this.docterid = docterid;
 	}
-	
-	
+
 }

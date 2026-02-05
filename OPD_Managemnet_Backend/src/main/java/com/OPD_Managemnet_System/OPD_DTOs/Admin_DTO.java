@@ -12,30 +12,29 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+//DTOs are used to transfer data between client and server.
 public class Admin_DTO {
 
-    @NotBlank(message = "Email is required")
-    private String email;
-  
-    @NotBlank(message = "Name is required")
-    private String name;
+	@NotBlank(message = "Email is required")
+	private String email;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password must be at least 6 characters")
-    private String password;
+	@NotBlank(message = "Name is required")
+	private String name;
 
-    @NotNull(message = "Mobile number is required")
-    @Digits(integer = 10, fraction = 0)
-    private Long mobileNo;
+	@NotBlank(message = "Password is required")
+	@Size(min = 6, message = "Password must be at least 6 characters")
+	private String password;
 
-    
-   
-    private LocalDateTime create_at;
+	@NotNull(message = "Mobile number is required")
+	@Digits(integer = 10, fraction = 0)
+	private Long mobileNo;
 
-   
-   
-    private LocalDateTime updatet_at;
-	
+	@NotNull(message = "Created date is required")
+	private LocalDateTime create_at;
+
+	@NotNull(message = "updatet date is required")
+	private LocalDateTime updatet_at;
+
 	public String getEmail() {
 		return email;
 	}
@@ -84,5 +83,4 @@ public class Admin_DTO {
 		this.name = name;
 	}
 
-	
 }

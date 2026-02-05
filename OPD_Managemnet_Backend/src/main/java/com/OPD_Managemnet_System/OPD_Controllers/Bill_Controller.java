@@ -23,19 +23,24 @@ import com.OPD_Managemnet_System.OPD_DTOs.Bill_DTO;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/Bill")
+@RequestMapping("/Bill") // Base URL for Bill APIs
 public class Bill_Controller {
-	
+
 	@Autowired
-	private Bill_Service bill_Service;
-	
+	private Bill_Service bill_Service; // Handles bill business logic
+
 	@Autowired
-	private Visit_Service visit_Service;
-	
+	private Visit_Service visit_Service; // Used to fetch visit details
+
+	// ---------------------- CREATE BILL ----------------------
+
 	@PostMapping("/")
-	public ResponseEntity<Bill> SaveBill(@Valid@RequestBody Bill_DTO bill_DTO){
+	public ResponseEntity<Bill> SaveBill(@Valid @RequestBody Bill_DTO bill_DTO) {
+
+		// Create Bill entity object
 		Bill bill = new Bill();
-		
+
+		// Map DTO data to Entity
 		bill.setConcession(bill_DTO.getConcession());
 		bill.setConsultation_fee(bill_DTO.getConsultation_fee());
 		bill.setCreated_at(bill_DTO.getCreated_at());
@@ -44,59 +49,95 @@ public class Bill_Controller {
 		bill.setPaymet_method(bill_DTO.getPaymet_method());
 		bill.setPending_amount(bill_DTO.getPending_amount());
 		bill.setTotal_amount(bill_DTO.getTotal_amount());
-		
-		Visit visit=visit_Service.getBYID(bill_DTO.getVisitid());
-		
-		Bill Savebill=bill_Service.save(bill);
-		
-		return new ResponseEntity<>(Savebill,HttpStatus.CREATED);
-		
+
+		// Fetch visit details using visit ID
+		Visit visit = visit_Service.getBYID(bill_DTO.getVisitid());
+
+		// Save bill record
+		Bill Savebill = bill_Service.save(bill);
+
+		return new ResponseEntity<>(Savebill, HttpStatus.CREATED);
+
 	}
-	
+
+	// ---------------------- GET ALL BILLS ----------------------
+
 	@GetMapping("/")
-	public ResponseEntity<List<Bill>> GetAllBill(){
-		List<Bill> bill=bill_Service.GetallBill();
-		if(bill==null) {
+	public ResponseEntity<List<Bill>> GetAllBill() {
+
+		List<Bill> bill = bill_Service.GetallBill();
+
+		// Return 404 if no bills found
+		if (bill == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}return new ResponseEntity<>(bill,HttpStatus.OK);
+		}
+
+		return new ResponseEntity<>(bill, HttpStatus.OK);
 	}
-	
+
+	// ---------------------- GET BILL BY ID ----------------------
+
 	@GetMapping("/{id}")
-	public ResponseEntity<Bill> GetAllBillById(@PathVariable("id")int id) {
-		Bill bill=bill_Service.GetBillById(id);
-		if(bill==null) {
+	public ResponseEntity<Bill> GetAllBillById(@PathVariable("id") int id) {
+
+		Bill bill = bill_Service.GetBillById(id);
+
+		// Return 404 if bill not found
+		if (bill == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}return new ResponseEntity<>(bill,HttpStatus.OK);
-		
-}
+		}
+
+		return new ResponseEntity<>(bill, HttpStatus.OK);
+
+	}
+
+	// ---------------------- UPDATE BILL ----------------------
+
 	@PutMapping("{id}")
-	public ResponseEntity<Bill> UpdateAllBillById(@PathVariable("id")int id,@Valid @RequestBody Bill_DTO bill_DTO){
-		Bill bill=bill_Service.GetBillById(id);
-		if(bill==null) {
+	public ResponseEntity<Bill> UpdateAllBillById(@PathVariable("id") int id, @Valid @RequestBody Bill_DTO bill_DTO) {
+
+		Bill bill = bill_Service.GetBillById(id);
+
+		// Check if bill exists before update
+		if (bill == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		// Update bill details
+		bill.setConcession(bill_DTO.getConcession());
+		bill.setConsultation_fee(bill_DTO.getConsultation_fee());
+		bill.setCreated_at(bill_DTO.getCreated_at());
+		bill.setPaid_amount(bill_DTO.getPaid_amount());
+		bill.setPayment_status(bill_DTO.getPayment_status());
+		bill.setPaymet_method(bill_DTO.getPaymet_method());
+		bill.setPending_amount(bill_DTO.getPending_amount());
+		bill.setTotal_amount(bill_DTO.getTotal_amount());
+
+		// Fetch visit details using visit ID
+		Visit visit = visit_Service.getBYID(bill_DTO.getVisitid());
+
+		// Save updated bill
+		Bill Savebill = bill_Service.save(bill);
+
+		return new ResponseEntity<>(Savebill, HttpStatus.CREATED);
+
 	}
-	bill.setConcession(bill_DTO.getConcession());
-	bill.setConsultation_fee(bill_DTO.getConsultation_fee());
-	bill.setCreated_at(bill_DTO.getCreated_at());
-	bill.setPaid_amount(bill_DTO.getPaid_amount());
-	bill.setPayment_status(bill_DTO.getPayment_status());
-	bill.setPaymet_method(bill_DTO.getPaymet_method());
-	bill.setPending_amount(bill_DTO.getPending_amount());
-	bill.setTotal_amount(bill_DTO.getTotal_amount());
-	
-	Visit visit=visit_Service.getBYID(bill_DTO.getVisitid());
-	
-	Bill Savebill=bill_Service.save(bill);
-	
-	return new ResponseEntity<>(Savebill,HttpStatus.CREATED);
-	
-	}
+
+	// ---------------------- DELETE BILL ----------------------
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Bill> UpdateAllBillById(@PathVariable("id")int id){
-		Bill bill=bill_Service.GetBillById(id);
-		if(bill==null) {
+	public ResponseEntity<Bill> UpdateAllBillById(@PathVariable("id") int id) {
+
+		Bill bill = bill_Service.GetBillById(id);
+
+		// Check if bill exists before deletion
+		if (bill == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}bill_Service.deleteBillById(id);
-	return new ResponseEntity<>(HttpStatus.MOVED_PERMANENTLY);
+		}
+
+		// Delete bill record
+		bill_Service.deleteBillById(id);
+
+		return new ResponseEntity<>(HttpStatus.MOVED_PERMANENTLY);
 	}
 }

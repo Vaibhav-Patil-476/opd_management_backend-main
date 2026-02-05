@@ -19,49 +19,42 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+//Entity class representing database table for OPD management
 @Entity
-@Table(name="Patients")
+@Table(name = "Patients")
 public class Patient {
 
+	// It uniquely identifies each record in the database table.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 
 	private String patient_name;
-	
 
 	private int age;
-
 
 	private String gender;
 
 	private long mibileno;
 
-
 	private String address;
-
 
 	private String blood_group;
 
 	private String height;
 
-
-
 	private String smoking;
-
 
 	private String alcohol;
 
-
 	private String tobacoo;
 
-
 	private LocalDateTime created_at;
-	
+
+	// Apply many to one Relationship between Patient and Doctor
 	@ManyToOne
-	@JoinColumn(name="doctorid")
-	@JsonIgnoreProperties(value="doctorid",allowSetters = true)
+	@JoinColumn(name = "doctorid")
+	@JsonIgnoreProperties(value = "doctorid", allowSetters = true)
 	private Doctor doctorid;
 
 	public int getId() {
@@ -199,6 +192,5 @@ public class Patient {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }

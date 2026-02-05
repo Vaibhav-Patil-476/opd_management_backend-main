@@ -13,24 +13,24 @@ import com.OPD_Managemnet_System.OPDServices.Admin_Service;
 
 @Service
 public class Admin_ServiceIMPl implements Admin_Service {
-	
+
 	@Autowired
 	private Admin_Repo admin_Repo;
 
 	@Override
 	public Admin saveAdmin(Admin admin) {
 		try {
-			return admin_Repo.save(admin) ;
+			return admin_Repo.save(admin); // repository method
 		} catch (Exception e) {
 			throw new DatabaseException("Internal Server Error...!");
 		}
-		
+
 	}
 
 	@Override
 	public List<Admin> getAllAdmin() {
 		try {
-			return admin_Repo.findAll();
+			return admin_Repo.findAll();// repository method
 		} catch (Exception e) {
 			throw new ResourceNotFoundException("Admin List not Exist...!");
 		}
@@ -38,16 +38,17 @@ public class Admin_ServiceIMPl implements Admin_Service {
 
 	@Override
 	public Admin getadminById(int id) {
-		
-		return admin_Repo.findById (id).orElseThrow(()-> new ResourceNotFoundException("Admin not Exist by this Id...!"+id));
+
+		return admin_Repo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Admin not Exist by this Id...!" + id));
 	}
 
 	@Override
 	public void deleteAdminById(int id) {
 		try {
-			admin_Repo.deleteById(id);
+			admin_Repo.deleteById(id);// repository method
 		} catch (Exception e) {
-			throw new ResourceNotFoundException("Admin not Exist by this Id...!"+id);
+			throw new ResourceNotFoundException("Admin not Exist by this Id...!" + id);
 		}
 	}
 

@@ -16,20 +16,21 @@ import jakarta.validation.Valid;
 @RequestMapping("/auth")
 public class Auth_Controller {
 
+	// Inject service layer to perform Auth-related operations
 	@Autowired
-	private  Auth_Service service;
-	
-	//login controller
+	private Auth_Service service;
+
+	// login controller
 	@PostMapping("/login/doctor")
 	public JWtResponse DoctorLogin(@Valid @RequestBody Login_Request request) {
 		return service.doctorlogin(request);
 	}
-	
+
 	@PostMapping("/login/reception")
 	public JWtResponse receptionLogin(@Valid @RequestBody Login_Request request) {
 		return service.receptionLogin(request);
 	}
-	
+
 	@PostMapping("/login/admin")
 	public JWtResponse adminLogin(@Valid @RequestBody Login_Request request) {
 		return service.adminLogin(request);

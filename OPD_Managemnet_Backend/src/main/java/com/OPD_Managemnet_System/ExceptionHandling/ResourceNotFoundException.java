@@ -4,7 +4,7 @@ package com.OPD_Managemnet_System.ExceptionHandling;
 public class ResourceNotFoundException extends RuntimeException {
 
 	public ResourceNotFoundException(String message) {
-		//call parent class constructor
+		// call parent class constructor
 		super(message);
 	}
 }

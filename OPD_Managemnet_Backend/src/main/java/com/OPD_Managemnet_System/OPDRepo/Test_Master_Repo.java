@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.OPD_Managemnet_System.OPDEntitys.Test_Master;
 
-@Repository
+@Repository // access jpa method 
 public interface Test_Master_Repo extends JpaRepository<Test_Master, Integer> {
 
 }

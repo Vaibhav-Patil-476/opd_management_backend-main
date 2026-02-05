@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.OPD_Managemnet_System.OPDEntitys.Admin;
 import com.OPD_Managemnet_System.OPDEntitys.Doctor;
 
-@Repository
+@Repository // access jpa method 
 public interface Admin_Repo extends JpaRepository<Admin, Integer> {
 
+	//Option Method for finding email
 	 Optional<Admin> findByEmail(String email);
 
 	    // Check if Doctor exists by Email

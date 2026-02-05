@@ -11,138 +11,141 @@ import jakarta.validation.constraints.Size;
 
 public class Doctor_DTO {
 
-    @NotBlank(message = "Name is required")
-    private String name;
+	@NotBlank(message = "Name is required")
+	private String name;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password must be at least 6 characters")
-    private String password;
+	@NotBlank(message = "Password is required")
+	@Size(min = 6, message = "Password must be at least 6 characters")
+	private String password;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
-    private String email;
+	@NotBlank(message = "Email is required")
+	@Email(message = "Invalid email format")
+	private String email;
 
-    @NotBlank(message = "Specialization is required")
-    private String specialization;
+	@NotBlank(message = "Specialization is required")
+	private String specialization;
 
-    @NotBlank(message = "Clinic name is required")
-    private String clinic_name;
+	@NotBlank(message = "Clinic name is required")
+	private String clinic_name;
 
-    @NotBlank(message = "Address is required")
-    private String address;
+	@NotBlank(message = "Address is required")
+	private String address;
 
-    // 🔥 FIX: mobile as String + Pattern
-    @NotNull(message = "Mobile number is required")
-    @Digits(integer = 10, fraction = 0, message = "Mobile number must be 10 digits")
-    private Long mobileno;
-    
-    String token;
+	// 🔥 FIX: mobile as String + Pattern
+	@NotNull(message = "Mobile number is required")
+	@Digits(integer = 10, fraction = 0, message = "Mobile number must be 10 digits")
+	private Long mobileno;
 
-    @NotBlank(message = "Status is required")
-    private String status;
+	String token;
 
-    // ❌ Do NOT validate dates in DTO (set in service)
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+	@NotBlank(message = "Status is required")
+	private String status;
 
-    @NotBlank(message = "Qualification is required")
-    private String qualification;
+	// ❌ Do NOT validate dates in DTO (set in service)
+	@NotNull(message = "Created date is required")
+	private LocalDateTime created_at;
+	
+	@NotNull(message = "Updated date is required")
+	private LocalDateTime updated_at;
 
-    // ---------- Getters & Setters ----------
+	@NotBlank(message = "Qualification is required")
+	private String qualification;
 
-    public String getName() {
-        return name;
-    }
+	// ---------- Getters & Setters ----------
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getSpecialization() {
-        return specialization;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
-    }
+	public String getSpecialization() {
+		return specialization;
+	}
 
-    public String getClinic_name() {
-        return clinic_name;
-    }
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
+	}
 
-    public void setClinic_name(String clinic_name) {
-        this.clinic_name = clinic_name;
-    }
+	public String getClinic_name() {
+		return clinic_name;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public void setClinic_name(String clinic_name) {
+		this.clinic_name = clinic_name;
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public long getMobileno() {
-        return mobileno;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public void setMobileno(long mobileno) {
-        this.mobileno = mobileno;
-    }
+	public long getMobileno() {
+		return mobileno;
+	}
 
-    public String getToken() {
-        return token;
-    }
+	public void setMobileno(long mobileno) {
+		this.mobileno = mobileno;
+	}
 
-    public void setToken(String token) {
-        this.token = token;
-    }
+	public String getToken() {
+		return token;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public void setToken(String token) {
+		this.token = token;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public LocalDateTime getCreated_at() {
-        return created_at;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at; // ✅ FIXED
-    }
+	public LocalDateTime getCreated_at() {
+		return created_at;
+	}
 
-    public LocalDateTime getUpdated_at() {
-        return updated_at;
-    }
+	public void setCreated_at(LocalDateTime created_at) {
+		this.created_at = created_at; // ✅ FIXED
+	}
 
-    public void setUpdated_at(LocalDateTime updated_at) {
-        this.updated_at = updated_at; // ✅ FIXED
-    }
+	public LocalDateTime getUpdated_at() {
+		return updated_at;
+	}
 
-    public String getQualification() {
-        return qualification;
-    }
+	public void setUpdated_at(LocalDateTime updated_at) {
+		this.updated_at = updated_at; // ✅ FIXED
+	}
 
-    public void setQualification(String qualification) {
-        this.qualification = qualification;
-    }
+	public String getQualification() {
+		return qualification;
+	}
+
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
 }

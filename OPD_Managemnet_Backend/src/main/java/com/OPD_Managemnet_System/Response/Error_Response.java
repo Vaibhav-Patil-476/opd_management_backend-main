@@ -10,7 +10,6 @@ public class Error_Response {
 	private int status;
 	private String message;
 
-	
 	private LocalDateTime localdatetime;
 
 	// getters and setters

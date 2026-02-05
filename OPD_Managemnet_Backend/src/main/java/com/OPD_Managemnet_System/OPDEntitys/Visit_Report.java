@@ -16,29 +16,28 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+//Entity class representing database table for OPD management
 @Entity
-@Table(name="Visit_Reports")
+@Table(name = "Visit_Reports")
 public class Visit_Report {
 
+	// It uniquely identifies each record in the database table.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private String file_name;
 
-
 	private String file_url;
-
 
 	private String file_type;
 
-
 	private LocalDateTime created_at;
-	
+	// Apply Many to One Relationship between visit report and visit
 	@ManyToOne
-	@JoinColumn(name="visitid")
-	@JsonIgnoreProperties(value="visitid",allowSetters = true)
-	
+	@JoinColumn(name = "visitid")
+	@JsonIgnoreProperties(value = "visitid", allowSetters = true)
+
 	private Visit visitid;
 
 	public int getId() {
@@ -89,7 +88,8 @@ public class Visit_Report {
 		this.visitid = visitid;
 	}
 
-	public Visit_Report(int id, String file_name, String file_url, String file_type, LocalDateTime created_at, Visit visitid) {
+	public Visit_Report(int id, String file_name, String file_url, String file_type, LocalDateTime created_at,
+			Visit visitid) {
 		super();
 		this.id = id;
 		this.file_name = file_name;
@@ -109,6 +109,5 @@ public class Visit_Report {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }

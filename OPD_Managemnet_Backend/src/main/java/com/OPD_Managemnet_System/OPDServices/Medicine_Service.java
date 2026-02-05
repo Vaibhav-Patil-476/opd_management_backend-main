@@ -6,12 +6,11 @@ import com.OPD_Managemnet_System.OPDEntitys.Medicine;
 
 public interface Medicine_Service {
 
-	//Create Abstract Method (Save , GetAll ,ByID and DeleteById)
-	Medicine save (Medicine medicine);
-	
-	List<Medicine> GetAllMedicine();
-	
-	Medicine GetMedicineById(int id);
-	
-	void deleteById(int id);
+	Medicine save(Medicine medicine);// user defined method for save data
+
+	List<Medicine> GetAllMedicine(); // user defined method for show list of doctor data
+
+	Medicine GetMedicineById(int id);// user defined method for show doctor data by there id
+
+	void deleteById(int id); // user defined method for delete doctor data by there id
 }

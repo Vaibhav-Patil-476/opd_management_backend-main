@@ -12,47 +12,46 @@ import com.OPD_Managemnet_System.OPDRepo.Referral_Repo;
 import com.OPD_Managemnet_System.OPDServices.Referral_Service;
 
 @Service
-public class Referral_ServiceIMPL implements Referral_Service{
+public class Referral_ServiceIMPL implements Referral_Service {
 
 	@Autowired
 	private Referral_Repo referral_Repo;
+
 	@Override
 	public Referral save(Referral referral) {
 		try {
-			return referral_Repo.save(referral);
+			return referral_Repo.save(referral);// repository method
 		} catch (Exception e) {
 			throw new DatabaseException("Internal server error...!");
 		}
-		
+
 	}
 
 	@Override
 	public List<Referral> getAllReferral() {
 		try {
-			return referral_Repo.findAll();
+			return referral_Repo.findAll();// repository method
 		} catch (Exception e) {
 			throw new ResourceNotFoundException("Referral List is not Exist...!");
 		}
-		
+
 	}
 
 	@Override
 	public Referral GetReferralById(int id) {
-		
-		return referral_Repo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Referral not exist by this id....!"+id));
-	}
 
+		return referral_Repo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Referral not exist by this id....!" + id));
+	}
 
 	@Override
 	public void deleteReferralById(int id) {
 		try {
-			referral_Repo.deleteById(id);
+			referral_Repo.deleteById(id);// repository method
 		} catch (Exception e) {
 			throw new ResourceNotFoundException("Referral id not Exist....!");
 		}
-		
-	}
 
-	
+	}
 
 }

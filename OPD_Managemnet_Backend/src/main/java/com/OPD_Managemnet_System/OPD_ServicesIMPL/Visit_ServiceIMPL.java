@@ -16,41 +16,42 @@ public class Visit_ServiceIMPL implements Visit_Service {
 
 	@Autowired
 	private Visit_repo visit_repo;
-	
+
 	@Override
 	public Visit save(Visit visit) {
 		try {
-			return visit_repo.save(visit);
+			return visit_repo.save(visit);// repository method
 		} catch (Exception e) {
 			throw new DatabaseException("Internal Server Error...!");
 		}
-		
+
 	}
 
 	@Override
 	public List<Visit> getAll() {
 		try {
-			return visit_repo.findAll();
+			return visit_repo.findAll();// repository method
 		} catch (Exception e) {
 			throw new ResourceNotFoundException("Visit List not Exist....!");
 		}
-		
+
 	}
 
 	@Override
 	public Visit getBYID(int id) {
-		
-		return visit_repo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Visit is not exist bu this id...!"+id));
+
+		return visit_repo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Visit is not exist by this id...!" + id));
 	}
 
 	@Override
 	public void deleteBYID(int id) {
 		try {
-			visit_repo.deleteById(id);
+			visit_repo.deleteById(id);// repository method
 		} catch (Exception e) {
-			throw new ResourceNotFoundException("Vist is not exist by this id"+id);
+			throw new ResourceNotFoundException("Vist is not exist by this id" + id);
 		}
-		
+
 	}
 
 }

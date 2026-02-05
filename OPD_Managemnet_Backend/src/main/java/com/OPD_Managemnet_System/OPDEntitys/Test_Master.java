@@ -11,28 +11,28 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
+//Entity class representing database table for OPD management
 @Entity
-@Table(name="Test_Masters")
+@Table(name = "Test_Masters")
 public class Test_Master {
 
+	// It uniquely identifies each record in the database table.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+
 	private int id;
-	
 
-private String test_name;
+	private String test_name;
 
+	private String normal_range;
 
-private String normal_range;
+	private String unit;
 
-
-private String unit;
-	
+	// Apply Many to One Relationship between Test Master and Doctor
 	@ManyToOne
-	@JoinColumn(name="Doctorid")
-	@JsonIgnoreProperties(value="Doctorid",allowSetters =true )
-	
+	@JoinColumn(name = "Doctorid")
+	@JsonIgnoreProperties(value = "Doctorid", allowSetters = true)
+
 	private Doctor Doctorid;
 
 	public int getId() {
@@ -94,10 +94,5 @@ private String unit;
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
-	
-	
+
 }

@@ -15,40 +15,43 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+//Entity class representing database table for OPD management
 @Entity
-@Table(name="Referrals")
+@Table(name = "Referrals")
 public class Referral {
 
+	// It uniquely identifies each record in the database table.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	private String note_type;
 
-private String note_type;
+	private String reson;
 
-private String reson;
+	private String details;
 
+	private LocalDateTime create_at;
 
-private String details;
-
-
-private LocalDateTime create_at;
-	
+	//Apply Many to One Relationship between Referral and Doctor
 	@ManyToOne
-	@JoinColumn(name="Doctorid")
-	@JsonIgnoreProperties(value={"Doctorid"}, allowSetters = true)
-	private  Doctor Doctorid;
-	
-	@ManyToOne
-	@JoinColumn(name="patientid")
-	@JsonIgnoreProperties(value={"patientid"}, allowSetters = true)
-	private  Patient patientid;
-	
-	@ManyToOne
-	@JoinColumn(name="visitid")
-	@JsonIgnoreProperties(value={"Doctorid"}, allowSetters = true)
-	private  Visit visitid;
+	@JoinColumn(name = "Doctorid")
+	@JsonIgnoreProperties(value = { "Doctorid" }, allowSetters = true)
+	private Doctor Doctorid;
 
+	//Apply Many to One Relationship between Referral and Patient 
+	@ManyToOne
+	@JoinColumn(name = "patientid")
+	@JsonIgnoreProperties(value = { "patientid" }, allowSetters = true)
+	private Patient patientid;
+
+	//Apply Many to One Relationship between Referral and visit 
+	@ManyToOne
+	@JoinColumn(name = "visitid")
+	@JsonIgnoreProperties(value = { "Doctorid" }, allowSetters = true)
+	private Visit visitid;
+
+	//getter and setter 
 	public int getId() {
 		return id;
 	}
@@ -137,6 +140,5 @@ private LocalDateTime create_at;
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }

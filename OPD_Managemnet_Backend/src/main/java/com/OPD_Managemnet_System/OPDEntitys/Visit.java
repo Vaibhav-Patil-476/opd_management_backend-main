@@ -16,115 +16,87 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+//Entity class representing database table for OPD management
 @Entity
-@Table(name="Visits")
+@Table(name = "Visits")
 public class Visit {
 
+	// It uniquely identifies each record in the database table.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+
 	private int id;
 
+	private Date date;
 
-private Date date;
+	private String complaints;
 
+	private String diagnosis;
 
-private String complaints;
+	private String advice;
 
+	private String bp;
 
-private String diagnosis;
+	private String pulse;
 
+	private String saturation;
 
-private String advice;
+	private String temperature;
 
+	private String respiration_rate;
 
-private String bp;
+	private String sugar;
 
+	private String fasting_sugar;
 
-private String pulse;
+	private String pp_sugar;
 
+	private String random_sugar;
 
-private String saturation;
+	private String urea_creatinine;
 
+	private String past_history;
 
-private String temperature;
+	private String current_medication;
 
+	private String addition_notes;
 
-private String respiration_rate;
+	private int weight;
 
+	private String edema;
 
-private String sugar;
+	private String pallor;
 
+	private String jaundice;
 
-private String fasting_sugar;
+	private String cvs;
 
+	private String rs;
 
-private String pp_sugar;
+	private String pa;
 
+	private String cns;
 
-private String random_sugar;
+	private String hb;
 
+	private String ecg;
 
-private String urea_creatinine;
+	private LocalDateTime followup_date;
 
+	private LocalDateTime create_at;
 
-private String past_history;
+	private LocalDateTime update_at;
 
-
-private String current_medication;
-
-
-private String addition_notes;
-
-
-private int weight;
-
-
-private String edema;
-
-
-private String pallor;
-
-
-private String jaundice;
-
-
-private String cvs;
-
-
-private String rs;
-
-
-private String pa;
-
-
-private String cns;
-
-
-private String hb;
-
-
-private String ecg;
-
-
-private LocalDateTime followup_date;
-
-
-private LocalDateTime create_at;
-
-
-private LocalDateTime update_at;
-	
+	// Apply Many to One Relationship between visit report and
 	@ManyToOne
-	@JoinColumn(name="Doctorid")
-	@JsonIgnoreProperties(value="Doctorid",allowSetters = true)
-	
+	@JoinColumn(name = "Doctorid")
+	@JsonIgnoreProperties(value = "Doctorid", allowSetters = true)
 	private Doctor Doctorid;
-	
+
+	// Apply Many to One Relationship between visit report and
 	@ManyToOne
-	@JoinColumn(name="patientid")
-	@JsonIgnoreProperties(value="patientid",allowSetters = true)
-	
+	@JoinColumn(name = "patientid")
+	@JsonIgnoreProperties(value = "patientid", allowSetters = true)
 	private Patient patientid;
 
 	public int getId() {
@@ -450,6 +422,5 @@ private LocalDateTime update_at;
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }

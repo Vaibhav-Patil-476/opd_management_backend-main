@@ -26,89 +26,129 @@ import com.OPD_Managemnet_System.OPD_DTOs.Diagnostics_DTO;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("Diagnostics")
+@RequestMapping("Diagnostics") // Base URL for Diagnostics APIs
 public class Diagnostics_Controller {
 
-	//Autowired all required Service file input 
+	// ---------------------- AUTOWIRED SERVICES ----------------------
+
+	// Handles diagnostics-related business logic
 	@Autowired
 	private Diagnostics_Service diagnostics_Service;
-	
+
+	// Used to fetch doctor details
 	@Autowired
 	private Doctor_Service doctor_Service;
-	
+
+	// Used to fetch visit details
 	@Autowired
 	private Visit_Service visit_Service;
-	
-	//postmapping method for save diagnostics in database
+
+	// ---------------------- CREATE DIAGNOSTICS ----------------------
+
+	// Save diagnostics details into database
 	@PostMapping("/")
-	public ResponseEntity<Diagnostics> SaveDiagnostics(@Valid@RequestBody Diagnostics_DTO diagnostics_DTO){
+	public ResponseEntity<Diagnostics> SaveDiagnostics(@Valid @RequestBody Diagnostics_DTO diagnostics_DTO) {
+
+		// Create Diagnostics entity object
 		Diagnostics diagnostics = new Diagnostics();
-		
+
+		// Map DTO data to Entity
 		diagnostics.setName(diagnostics_DTO.getName());
 		diagnostics.setCreatedAt(diagnostics_DTO.getCreate_at());
-		
-		Doctor doctor=doctor_Service.getBYID(diagnostics_DTO.getDoctorid());
+
+		// Fetch doctor using doctor ID
+		Doctor doctor = doctor_Service.getBYID(diagnostics_DTO.getDoctorid());
 		diagnostics.setDoctorid(doctor);
-		
+
+		// Fetch visit using visit ID
 		Visit visit = visit_Service.getBYID(diagnostics_DTO.getVisitid());
 		diagnostics.setVisitid(visit);
-		
-		Diagnostics savediagnostics=diagnostics_Service.saveDiagnostics(diagnostics);
-		
-		return new ResponseEntity<>(savediagnostics,HttpStatus.CREATED);
-		
+
+		// Save diagnostics record
+		Diagnostics savediagnostics = diagnostics_Service.saveDiagnostics(diagnostics);
+
+		return new ResponseEntity<>(savediagnostics, HttpStatus.CREATED);
+
 	}
-	
-	//getmapping method for get all diagnostics from database
+
+	// ---------------------- GET ALL DIAGNOSTICS ----------------------
+
+	// Fetch all diagnostics records from database
 	@GetMapping("/")
-	public ResponseEntity<List<Diagnostics>> getAllDiagnostics(){
-		List<Diagnostics> diagnostics=diagnostics_Service.getAllDiagnostics();
-		if(diagnostics==null) {
+	public ResponseEntity<List<Diagnostics>> getAllDiagnostics() {
+
+		List<Diagnostics> diagnostics = diagnostics_Service.getAllDiagnostics();
+
+		// Return 404 if no records found
+		if (diagnostics == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			
-		}return new ResponseEntity<>(diagnostics,HttpStatus.OK);
+
+		}
+		return new ResponseEntity<>(diagnostics, HttpStatus.OK);
 	}
-	
-	
-	//postmapping method for get all diagnostics by id from  database
+
+	// ---------------------- GET DIAGNOSTICS BY ID ----------------------
+
+	// Fetch diagnostics record using diagnostics ID
 	@GetMapping("/{id}")
-	public ResponseEntity<Diagnostics> getDiagnosticsById(@PathVariable("id") int id){
+	public ResponseEntity<Diagnostics> getDiagnosticsById(@PathVariable("id") int id) {
+
 		Diagnostics diagnostics = diagnostics_Service.getByDiagnosticsID(id);
-		if(diagnostics==null) {
+
+		// Return 404 if diagnostics not found
+		if (diagnostics == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
-		return new ResponseEntity<>(HttpStatus.OK);	
+
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
-	//put mapping method for get and  update diagnostics in database
+
+	// ---------------------- UPDATE DIAGNOSTICS ----------------------
+
+	// Update diagnostics record using ID
 	@PutMapping("/{id}")
-	public ResponseEntity<Diagnostics> UpaddteDiagnosticsById(@PathVariable("id") int id,@Valid @RequestBody Diagnostics_DTO diagnostics_DTO){
+	public ResponseEntity<Diagnostics> UpaddteDiagnosticsById(@PathVariable("id") int id,
+			@Valid @RequestBody Diagnostics_DTO diagnostics_DTO) {
+
 		Diagnostics diagnostics = diagnostics_Service.getByDiagnosticsID(id);
-		if(diagnostics==null) {
+
+		// Check if diagnostics exists before update
+		if (diagnostics == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+
+		// Update diagnostics details
 		diagnostics.setName(diagnostics_DTO.getName());
 		diagnostics.setCreatedAt(diagnostics_DTO.getCreate_at());
-		
-		Doctor docter=doctor_Service.getBYID(diagnostics_DTO.getDoctorid());
+
+		// Update doctor reference
+		Doctor docter = doctor_Service.getBYID(diagnostics_DTO.getDoctorid());
 		diagnostics.setDoctorid(docter);
-		
+
+		// Update visit reference
 		Visit visit = visit_Service.getBYID(diagnostics_DTO.getVisitid());
 		diagnostics.setVisitid(visit);
-		
+
 		return new ResponseEntity<>(HttpStatus.CREATED);
-		
-		
+
 	}
-	
-	//Delete mapping method for delete diagnostics by id  in database
+
+	// ---------------------- DELETE DIAGNOSTICS ----------------------
+
+	// Delete diagnostics record using ID
 	@DeleteMapping("{id}")
-	public ResponseEntity<Void> DeleteDiagnosticsById(@PathVariable("id") int id ){
+	public ResponseEntity<Void> DeleteDiagnosticsById(@PathVariable("id") int id) {
+
 		Diagnostics diagnostics = diagnostics_Service.getByDiagnosticsID(id);
-		if(diagnostics==null) {
+
+		// Check if diagnostics exists before deletion
+		if (diagnostics == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}diagnostics_Service.deleteById(id);
+		}
+
+		// Delete diagnostics record
+		diagnostics_Service.deleteById(id);
+
 		return new ResponseEntity<>(HttpStatus.MOVED_PERMANENTLY);
 	}
 }

@@ -18,44 +18,30 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+//Entity class representing database table for OPD management
+
 @Entity
-@Table(name="Bills")
+@Table(name = "Bills")
 public class Bill {
 
+	// It uniquely identifies each record in the database table.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	private int id;
-	
+	private BigDecimal consultation_fee;
+	private String payment_status;
+	private String paymet_method;
+	private BigDecimal concession;
+	private BigDecimal paid_amount;
+	private BigDecimal toatl_amount;
+	private BigDecimal pending_amount;
+	private LocalDateTime created_at;
 
-
-private BigDecimal consultation_fee;
-
-
-private String payment_status;
-
-
-private String paymet_method;
-
-
-private BigDecimal concession;
-
-
-private BigDecimal paid_amount;
-
-
-private BigDecimal toatl_amount;
-
-
-private BigDecimal pending_amount;
-
-
-private LocalDateTime created_at;
-	
+	//Apply Many to One Relationship 
 	@ManyToOne
-	@JoinColumn(name="visitid")
-	@JsonIgnoreProperties(value= {"visitid"}, allowSetters = true)
-	
+	@JoinColumn(name = "visitid")
+	@JsonIgnoreProperties(value = { "visitid" }, allowSetters = true)
+
 	private Visit visitid;
 
 	private BigDecimal total_amount;
@@ -168,6 +154,5 @@ private LocalDateTime created_at;
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }

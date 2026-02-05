@@ -15,35 +15,35 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+//Entity class representing database table for OPD management
 @Entity
-@Table(name="Pathology_Tests")
+@Table(name = "Pathology_Tests")
 public class Pathology_Test {
 
+	// It uniquely identifies each record in the database table.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private int id;
 
+	private String result;
 
-private String result;
+	private String remark;
 
+	private String report_file;
 
-private String remark;
+	private LocalDateTime create_at;
 
-
-private String report_file;
-
-
-private LocalDateTime create_at;
-	
+	// Many-to-One Relationship between Pathology_Test and Visit
 	@ManyToOne
-	@JoinColumn(name="visitid")
-	@JsonIgnoreProperties(value={"visitid"},allowSetters = true)
+	@JoinColumn(name = "visitid")
+	@JsonIgnoreProperties(value = { "visitid" }, allowSetters = true)
 	private Visit visitid;
-	
+
+	// Many-to-One Relationship between Pathology_Test and Test
 	@ManyToOne
-	@JoinColumn(name="testid")
-	@JsonIgnoreProperties(value={"testid"},allowSetters = true)
+	@JoinColumn(name = "testid")
+	@JsonIgnoreProperties(value = { "testid" }, allowSetters = true)
 	private Test_Master testid;
 
 	public int getId() {
@@ -102,8 +102,8 @@ private LocalDateTime create_at;
 		this.testid = testid;
 	}
 
-	public Pathology_Test(int id, String result, String remark, String report_file, LocalDateTime create_at, Visit visitid,
-			Test_Master testid) {
+	public Pathology_Test(int id, String result, String remark, String report_file, LocalDateTime create_at,
+			Visit visitid, Test_Master testid) {
 		super();
 		this.id = id;
 		this.result = result;
@@ -124,6 +124,5 @@ private LocalDateTime create_at;
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }

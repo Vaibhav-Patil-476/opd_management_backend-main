@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.OPD_Managemnet_System.OPDEntitys.Medicine;
 
-@Repository
+@Repository // access jpa method 
 public interface Medicine_Repo extends JpaRepository<Medicine, Integer> {
 
 }

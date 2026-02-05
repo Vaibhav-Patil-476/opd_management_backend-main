@@ -1,14 +1,15 @@
 package com.OPD_Managemnet_System.Response;
 
+//make Login Response
 public class Login_Response {
 
 	private String email;
-	
+
 	private String password;
-	
-	public Login_Response(String email,String password) {
-		this.email=email;
-		this.password=password;
+
+	public Login_Response(String email, String password) {
+		this.email = email;
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -26,6 +27,5 @@ public class Login_Response {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
 }

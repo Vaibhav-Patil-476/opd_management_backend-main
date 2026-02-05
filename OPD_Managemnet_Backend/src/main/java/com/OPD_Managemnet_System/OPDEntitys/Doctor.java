@@ -17,50 +17,46 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+//Entity class representing database table for OPD management
+
 @Entity
 @Table(name = "Doctors")
 public class Doctor {
-	
+
+	// It uniquely identifies each record in the database table.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-   
-    private String name;
 
-   
-    private String password;
+	private String name;
 
+	private String password;
 
-    private String email;
+	private String email;
 
+	private String specialization;
 
-    private String specialization;
+	private String clinic_name;
 
+	private String address;
 
-    private String clinic_name;
+	private Long mobileno;
 
-
-    private String address;
-
-
-    private Long mobileno;
-
-	
 	private String token;
-	
+
 	private String status;
-	
+
 	private LocalDateTime created_at;
-	
+
 	private LocalDateTime updated_at;
-	
+
 	private String qualification;
 	
-
+	// Define role 
 	@Enumerated(EnumType.STRING)
 	private Role Role;
-	
+
+	//getter setter 
 	public Role getRole() {
 		return Role;
 	}
@@ -69,7 +65,6 @@ public class Doctor {
 		Role = role.DOCTOR;
 	}
 
-	
 	public int getId() {
 		return id;
 	}
@@ -117,6 +112,7 @@ public class Doctor {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public String getQualification() {
 		return qualification;
 	}
@@ -164,6 +160,7 @@ public class Doctor {
 	public void setUpdated_at(LocalDateTime updated_at) {
 		this.updated_at = LocalDateTime.now();
 	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -173,7 +170,8 @@ public class Doctor {
 	}
 
 	public Doctor(int id, String name, String password, String specialization, String clinic_name, String address,
-			long mobileno, String token, String status, LocalDateTime created_at, LocalDateTime updated_at ,String email, String qualification) {
+			long mobileno, String token, String status, LocalDateTime created_at, LocalDateTime updated_at,
+			String email, String qualification) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -187,9 +185,8 @@ public class Doctor {
 		this.created_at = created_at;
 		this.updated_at = updated_at;
 		this.email = email;
-		this.qualification=qualification;
+		this.qualification = qualification;
 	}
-
 
 	@Override
 	public String toString() {
@@ -203,11 +200,5 @@ public class Doctor {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
-	
-	
-	
-	
 
 }

@@ -18,24 +18,29 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
 
-	  @Autowired
-	    private ObjectMapper objectMapper; // Spring-managed mapper
-    
-    @Override
-    public void commence(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            AuthenticationException authException
-    ) throws IOException, ServletException {
+	// ObjectMapper is used to convert Java objects into JSON responses
+	// It is injected by Spring container
+	@Autowired
+	private ObjectMapper objectMapper;
 
-        Error_Response error = new Error_Response(
-        		HttpServletResponse.SC_UNAUTHORIZED,
-                "Unauthorized: Invalid or missing JWT token"
-        );
+	@Override
+	public void commence(HttpServletRequest request, // Incoming HTTP request
+			HttpServletResponse response, // HTTP response to be sent
+			AuthenticationException authException // Exception thrown by Spring Security
+	) throws IOException, ServletException {
 
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.setContentType("application/json");
+		// Create a custom error response object
+		// 401 status indicates Unauthorized access
+		Error_Response error = new Error_Response(HttpServletResponse.SC_UNAUTHORIZED,
+				"Unauthorized: Invalid or missing JWT token");
 
-        objectMapper.writeValue(response.getOutputStream(), error); // ✅ FIX
-    }
+		// Set HTTP status code to 401 (Unauthorized)
+		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+		// Set response type as JSON
+		response.setContentType("application/json");
+
+		// Write the error response as JSON to the output stream
+		objectMapper.writeValue(response.getOutputStream(), error);
+	}
 }

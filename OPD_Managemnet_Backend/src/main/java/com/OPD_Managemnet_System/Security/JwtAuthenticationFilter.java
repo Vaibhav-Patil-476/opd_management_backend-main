@@ -100,7 +100,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			// 6️⃣ Continue filter chain ONCE
 			filterChain.doFilter(request, response);
 
-			//handling some exception of authentication
+			// handling some exception of authentication
 		} catch (ExpiredJwtException ex) {
 			sendError(response, "JWT token expired");
 
@@ -113,7 +113,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		}
 	}
 
-	// sending an error response of auth to user 
+	// sending an error response of auth to user
 	private void sendError(HttpServletResponse response, String message) throws IOException {
 		// filling exception output details to error response cong.
 		Error_Response error = new Error_Response(HttpServletResponse.SC_UNAUTHORIZED, message);

@@ -16,35 +16,29 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+//Entity class representing database table for OPD management
+
 @Entity
 @Table(name="Admin")
 public class Admin {
 
+	// It uniquely identifies each record in the database table.
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	
 	private String name;
-	
-   
-  
 	private String email;
-    
-    
 	private String password;
-	
-    
 	private long mobileNo;
-	
 	private LocalDateTime create_at;
-	
 	private LocalDateTime updatet_at;
-	
 
 	@Enumerated(EnumType.STRING)
-	private Role Role;
-
+	private Role Role; //Define role (Admin ,Doctor,Reception) 
+	
+	
+	//getter and setter 
 	public int getId() {
 		return id;
 	}

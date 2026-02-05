@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.OPD_Managemnet_System.OPDEntitys.Doctor;
 import com.OPD_Managemnet_System.OPDEntitys.Patient;
 
@@ -24,67 +23,27 @@ import com.OPD_Managemnet_System.OPD_DTOs.Patient_Dto;
 
 import jakarta.validation.Valid;
 
-@RequestMapping("/patient")
+@RequestMapping("/patient") // Base URL for Patient APIs
 @RestController
 public class Patient_Controller {
 
+	// ---------------------- AUTOWIRED SERVICES ----------------------
+
 	@Autowired
-	private Patient_Service patient_Service;
-	
+	private Patient_Service patient_Service; // Handles patient related operations
+
 	@Autowired
-	private Doctor_Service docter_Service;
-	
+	private Doctor_Service docter_Service; // Used to fetch doctor details
+
+	// ---------------------- REGISTER NEW PATIENT ----------------------
+
 	@PostMapping("/register")
-	public ResponseEntity<Patient> SavePatient(@Valid @RequestBody Patient_Dto patient_Dto){
-		
-		Patient patient= new Patient();
-		
-		patient.setPatient_name(patient_Dto.getPatient_name());
-		patient.setAge(patient_Dto.getAge());
-		patient.setAddress(patient_Dto.getAddress());
-		patient.setGender(patient_Dto.getGender());
-		patient.setBlood_group(patient_Dto.getBlood_group());
-		patient.setAlcohol(patient_Dto.getAlcohol());
-		patient.setMibileno(patient_Dto.getMibileno())
-;		patient.setTobacoo(patient_Dto.getTobacoo());
-		patient.setSmoking(patient_Dto.getSmoking());
-		patient.setCreated_at(patient_Dto.getCreated_at());
-		patient.setHeight(patient_Dto.getHeight());
-		
-		Doctor docter =	docter_Service.getBYID(patient_Dto.getDoctorid());
-		patient.setDocterid(docter);
-		
-		Patient SavePatient = patient_Service.save(patient);
-		
-		return new ResponseEntity<>(SavePatient,HttpStatus.CREATED);
-	}
-	
-	@GetMapping("/")
-	public ResponseEntity<List<Patient>> GetAllPatirnt(){
-		
-		List<Patient> patient = patient_Service.getAll();
-		if(patient==null) {
-			return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
-			
-		}return new ResponseEntity<>(patient,HttpStatus.OK);		
-	}
-	
-	@GetMapping("{id}")
-	public ResponseEntity<Patient> GetPatientById(@PathVariable("id") int id ){
-		
-		Patient patient = patient_Service.getBYID(id);
-		if(patient==null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}return new ResponseEntity<>(patient,HttpStatus.OK);
-	}
-	
-	@PutMapping("{id}")
-	public ResponseEntity<Patient> UpadatePatientById(@PathVariable("id")int id ,@Valid @RequestBody Patient_Dto patient_Dto){
-		
-		Patient patient = patient_Service.getBYID(id);
-		if(patient==null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+	public ResponseEntity<Patient> SavePatient(@Valid @RequestBody Patient_Dto patient_Dto) {
+
+		// Create Patient entity object
+		Patient patient = new Patient();
+
+		// Map DTO values to Patient entity
 		patient.setPatient_name(patient_Dto.getPatient_name());
 		patient.setAge(patient_Dto.getAge());
 		patient.setAddress(patient_Dto.getAddress());
@@ -94,24 +53,99 @@ public class Patient_Controller {
 		patient.setMibileno(patient_Dto.getMibileno());
 		patient.setTobacoo(patient_Dto.getTobacoo());
 		patient.setSmoking(patient_Dto.getSmoking());
-		
+		patient.setCreated_at(patient_Dto.getCreated_at());
 		patient.setHeight(patient_Dto.getHeight());
-		Doctor docter =	docter_Service.getBYID(patient_Dto.getDoctorid());
+
+		// Fetch doctor using doctor ID
+		Doctor docter = docter_Service.getBYID(patient_Dto.getDoctorid());
 		patient.setDocterid(docter);
-		
+
+		// Save patient record
 		Patient SavePatient = patient_Service.save(patient);
-		
-		return new ResponseEntity<>(SavePatient,HttpStatus.CREATED);
+
+		return new ResponseEntity<>(SavePatient, HttpStatus.CREATED);
 	}
-	
-	@DeleteMapping("{id}")
-	public ResponseEntity<Void> DeletePatientById(@PathVariable("id") int id){
-		
-		Patient patient=patient_Service.getBYID(id);
-		if(patient==null) {
+
+	// ---------------------- GET ALL PATIENTS ----------------------
+
+	@GetMapping("/")
+	public ResponseEntity<List<Patient>> GetAllPatirnt() {
+
+		List<Patient> patient = patient_Service.getAll();
+
+		// Return 404 if no patients found
+		if (patient == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+
+		return new ResponseEntity<>(patient, HttpStatus.OK);
+	}
+
+	// ---------------------- GET PATIENT BY ID ----------------------
+
+	@GetMapping("{id}")
+	public ResponseEntity<Patient> GetPatientById(@PathVariable("id") int id) {
+
+		Patient patient = patient_Service.getBYID(id);
+
+		// Return 404 if patient not found
+		if (patient == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<>(patient, HttpStatus.OK);
+	}
+
+	// ---------------------- UPDATE PATIENT DETAILS ----------------------
+
+	@PutMapping("{id}")
+	public ResponseEntity<Patient> UpadatePatientById(@PathVariable("id") int id,
+			@Valid @RequestBody Patient_Dto patient_Dto) {
+
+		Patient patient = patient_Service.getBYID(id);
+
+		// Check if patient exists before update
+		if (patient == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		// Update patient details
+		patient.setPatient_name(patient_Dto.getPatient_name());
+		patient.setAge(patient_Dto.getAge());
+		patient.setAddress(patient_Dto.getAddress());
+		patient.setGender(patient_Dto.getGender());
+		patient.setBlood_group(patient_Dto.getBlood_group());
+		patient.setAlcohol(patient_Dto.getAlcohol());
+		patient.setMibileno(patient_Dto.getMibileno());
+		patient.setTobacoo(patient_Dto.getTobacoo());
+		patient.setSmoking(patient_Dto.getSmoking());
+		patient.setHeight(patient_Dto.getHeight());
+
+		// Update doctor reference
+		Doctor docter = docter_Service.getBYID(patient_Dto.getDoctorid());
+		patient.setDocterid(docter);
+
+		// Save updated patient
+		Patient SavePatient = patient_Service.save(patient);
+
+		return new ResponseEntity<>(SavePatient, HttpStatus.CREATED);
+	}
+
+	// ---------------------- DELETE PATIENT ----------------------
+
+	@DeleteMapping("{id}")
+	public ResponseEntity<Void> DeletePatientById(@PathVariable("id") int id) {
+
+		Patient patient = patient_Service.getBYID(id);
+
+		// Check if patient exists before deletion
+		if (patient == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		// Delete patient record
 		patient_Service.delete(id);
+
 		return new ResponseEntity<>(HttpStatus.MOVED_PERMANENTLY);
 	}
-	}
+}

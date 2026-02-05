@@ -6,11 +6,11 @@ import com.OPD_Managemnet_System.OPDEntitys.Referral;
 
 public interface Referral_Service {
 
-	Referral save(Referral referral);
-	
-	List<Referral> getAllReferral();
-	
-	Referral GetReferralById(int id);
-	
-	void deleteReferralById(int id);
+	Referral save(Referral referral);// user defined method for save data
+
+	List<Referral> getAllReferral();// user defined method for show list of doctor data
+
+	Referral GetReferralById(int id);// user defined method for show doctor data by there id
+
+	void deleteReferralById(int id); // user defined method for delete doctor data by there id
 }

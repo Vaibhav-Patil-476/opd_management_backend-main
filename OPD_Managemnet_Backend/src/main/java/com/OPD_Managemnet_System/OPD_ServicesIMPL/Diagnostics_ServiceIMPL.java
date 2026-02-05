@@ -14,45 +14,46 @@ import com.OPD_Managemnet_System.OPDServices.Diagnostics_Service;
 @Service
 public class Diagnostics_ServiceIMPL implements Diagnostics_Service {
 
-	//Create Object of Diagnostics_Repo file
+	// Create Object of Diagnostics_Repo file
 	@Autowired
 	private Diagnostics_Repo diagnostics_Repo;
-	
-	//Implement Abstract Methods(Save , GetAll, GetById, and delete)
+
+	// Implement Abstract Methods(Save , GetAll, GetById, and delete)
 	@Override
 	public Diagnostics saveDiagnostics(Diagnostics diagnostics) {
 		try {
-			return diagnostics_Repo.save(diagnostics);
+			return diagnostics_Repo.save(diagnostics);// repository method
 		} catch (Exception e) {
 			throw new DatabaseException("Internal Server Error...!");
 		}
-		
+
 	}
 
 	@Override
 	public List<Diagnostics> getAllDiagnostics() {
 		try {
-			return diagnostics_Repo.findAll();
+			return diagnostics_Repo.findAll();// repository method
 		} catch (Exception e) {
 			throw new ResourceNotFoundException("Diagnostics List not exists...!");
 		}
-		
+
 	}
 
 	@Override
 	public Diagnostics getByDiagnosticsID(int id) {
-		
-		return diagnostics_Repo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Diagnostics not exists with this id...!"));
+
+		return diagnostics_Repo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Diagnostics not exists with this id...!"));
 	}
 
 	@Override
 	public void deleteById(int id) {
 		try {
-			diagnostics_Repo.deleteById(id);
+			diagnostics_Repo.deleteById(id);// repository method
 		} catch (Exception e) {
-			throw new ResourceNotFoundException("Diagnostics not exists with this id....!"+id);
+			throw new ResourceNotFoundException("Diagnostics not exists with this id....!" + id);
 		}
-		
+
 	}
 
 }

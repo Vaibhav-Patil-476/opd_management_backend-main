@@ -16,37 +16,29 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+//Entity class representing database table for OPD management
 @Entity
-@Table(name="Referral_Center")
+@Table(name = "Referral_Center")
 public class Referral_Center {
 
+	// It uniquely identifies each record in the database table.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+
 	private int id;
-	
+	private String name;
+	private String type;
+	private int contact_info;
+	private String address;
+	private LocalDateTime created_at;
 
-
-private String name;
-
-
-private String type;
-
-
-private int contact_info;
-
-
-private String address;
-
-
-private LocalDateTime created_at;
-	
-	//create Many to one Relationship
+	// create Many to one Relationship between Referral_center and doctor
 	@ManyToOne
-	@JoinColumn(name="Doctorid")
-	@JsonIgnoreProperties(value= {"Doctorid"},allowSetters = true)
+	@JoinColumn(name = "Doctorid")
+	@JsonIgnoreProperties(value = { "Doctorid" }, allowSetters = true)
 	private Doctor Doctorid;
 
+	// getter and setter
 	public int getId() {
 		return id;
 	}
@@ -125,6 +117,5 @@ private LocalDateTime created_at;
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 }
