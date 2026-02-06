@@ -24,6 +24,7 @@ public class FileStorageUtil {
 
             // 2. Create directory if not exists
             Path uploadPath = Paths.get(uploadDir);
+            
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }

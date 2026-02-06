@@ -1,6 +1,7 @@
 package com.OPD_Managemnet_System.OPDServices;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.core.io.Resource;
@@ -18,4 +19,6 @@ public interface Visit_Report_Service {
 	void deleteById(int id);//user defined method for delete doctor data by there id
 	
 	
+
+	List<Visit_Report> GetVisitReportByVisitId(long visitid);
 }

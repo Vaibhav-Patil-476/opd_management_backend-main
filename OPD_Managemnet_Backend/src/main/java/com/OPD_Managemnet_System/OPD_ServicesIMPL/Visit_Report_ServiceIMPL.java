@@ -1,6 +1,7 @@
 package com.OPD_Managemnet_System.OPD_ServicesIMPL;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -56,6 +57,16 @@ public class Visit_Report_ServiceIMPL implements Visit_Report_Service {
 			throw new ResourceNotFoundException("Visit Report not exist by this id....!" + id);
 		}
 
+	}
+
+	@Override
+	public List<Visit_Report> GetVisitReportByVisitId(long visitid) {
+		
+		try {
+			return visit_Report_Repo.findByVisitid_Id(visitid);
+		} catch (Exception e) {
+			throw new ResourceNotFoundException("Report not found for visit id: " + visitid);
+		}
 	}
 
 	

@@ -54,7 +54,7 @@ public class Doctor_ServiceIMPL implements Doctor_Service {
 		try {
 			doctor_Repo.deleteById(id);// repository method
 		} catch (Exception e) {
-			throw new ResourceNotFoundException("This id is Dose not exists...!");
+			throw new ResourceNotFoundException("This id is dose not exists...!");
 		}
 
 	}

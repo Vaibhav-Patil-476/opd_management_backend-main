@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.OPD_Managemnet_System.Response.Error_Response;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 //This class handle all exception Globally
 @RestControllerAdvice
 public class Globel_Exception_Handler {
@@ -60,4 +62,24 @@ public class Globel_Exception_Handler {
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
+	
+//	@ExceptionHandler(Exception.class)
+//	public ResponseEntity<?> handlexception(Exception ex,
+//	                                        HttpServletRequest request) {
+//
+//	    // 🔹 Download APIs should NOT return JSON
+//	    if (request.getRequestURI().contains("/download")) {
+//	        return ResponseEntity
+//	                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+//	                .build();
+//	    }
+//
+//	    Error_Response error = new Error_Response(
+//	            HttpStatus.INTERNAL_SERVER_ERROR.value(),
+//	            "Something Went Wrong....!"
+//	    );
+//
+//	    return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
+
 }

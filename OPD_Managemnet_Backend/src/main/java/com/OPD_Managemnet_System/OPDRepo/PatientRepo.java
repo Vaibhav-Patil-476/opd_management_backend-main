@@ -12,5 +12,6 @@ public interface PatientRepo extends JpaRepository<Patient, Integer> {
 	
 	//This Method for find Patient by doctor id
 	 List<Patient> findByDoctorid_Id(int docterId);
+	 
 }
 

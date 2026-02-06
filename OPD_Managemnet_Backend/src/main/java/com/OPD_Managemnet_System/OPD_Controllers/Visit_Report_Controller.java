@@ -1,10 +1,17 @@
 package com.OPD_Managemnet_System.OPD_Controllers;
 
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.MediaType;
+import org.springframework.core.io.UrlResource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,12 +26,18 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+
 import com.OPD_Managemnet_System.OPDEntitys.Visit;
 import com.OPD_Managemnet_System.OPDEntitys.Visit_Report;
 import com.OPD_Managemnet_System.OPDServices.Visit_Report_Service;
 import com.OPD_Managemnet_System.OPDServices.Visit_Service;
 import com.OPD_Managemnet_System.OPD_DTOs.Visit_Report_DTO;
 import com.OPD_Managemnet_System.Security.FileStorageUtil;
+
+import io.jsonwebtoken.io.IOException;
 
 import jakarta.validation.Valid;
 
@@ -132,4 +145,52 @@ public class Visit_Report_Controller {
 		visit_Report_Service.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.MOVED_PERMANENTLY);
 	}
+	
+	// ---------------------- Download Visit Report ----------------------
+	
+	@GetMapping("/download/{visitId}")
+	public ResponseEntity<Resource> downloadVisitReport(@PathVariable Long visitId) {
+
+	    // 1️⃣ Fetch all reports for the given visit ID
+	    List<Visit_Report> reports = visit_Report_Service.GetVisitReportByVisitId(visitId);
+
+	    // 2️⃣ If no reports found, return 404 Not Found
+	    if (reports == null || reports.isEmpty()) {
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    // 3️⃣ Take the first report (assuming only one per visit)
+	    Visit_Report report = reports.get(0);
+
+	    // 4️⃣ Get the file path stored in the database
+	    String filePathStr = report.getFile_url(); // should match the path returned by saveFile()
+	    if (filePathStr == null || filePathStr.isBlank()) {
+	        System.out.println("file_url is null for visitId: " + visitId);
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    // 5️⃣ Convert file path string to Path object and normalize it
+	    Path filePath = Paths.get(filePathStr).normalize();
+
+	    // 6️⃣ Check if the file exists and is not a directory
+	    if (!Files.exists(filePath) || Files.isDirectory(filePath)) {
+	        System.out.println("File not found or is a directory: " + filePath);
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    // 7️⃣ Create a Resource object for the file
+	    Resource resource = new FileSystemResource(filePath);
+
+	    // 8️⃣ Return the file as a downloadable response
+	    return ResponseEntity.ok()
+	            .contentType(MediaType.APPLICATION_OCTET_STREAM) // force download
+	            .header(HttpHeaders.CONTENT_DISPOSITION,
+	                    "attachment; filename=\"" + report.getFile_name() + "\"") // set original file name
+	            .body(resource);
+	}
+
+
+
+
 }
+

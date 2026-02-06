@@ -12,5 +12,7 @@ import com.OPD_Managemnet_System.OPDEntitys.Visit_Report;
 @Repository // access jpa method 
 public interface Visit_Report_Repo extends JpaRepository<Visit_Report, Integer> {
 
-	 List<Visit_Report> findByVisitid_Id(int visitId);
+//	 Visit_Report findByVisitid_Id(long visitId);
+	 
+	 List<Visit_Report> findByVisitid_Id(Long visitId);
 }
