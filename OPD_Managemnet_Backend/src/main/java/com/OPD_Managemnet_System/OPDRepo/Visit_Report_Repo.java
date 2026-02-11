@@ -1,5 +1,6 @@
 package com.OPD_Managemnet_System.OPDRepo;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,4 +16,7 @@ public interface Visit_Report_Repo extends JpaRepository<Visit_Report, Integer> 
 //	 Visit_Report findByVisitid_Id(long visitId);
 	 
 	 List<Visit_Report> findByVisitid_Id(Long visitId);
+	 
+	
+		
 }

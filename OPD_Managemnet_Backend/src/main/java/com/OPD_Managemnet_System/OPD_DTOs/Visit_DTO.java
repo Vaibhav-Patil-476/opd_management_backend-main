@@ -1,6 +1,7 @@
 package com.OPD_Managemnet_System.OPD_DTOs;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.Min;
@@ -11,7 +12,7 @@ import jakarta.validation.constraints.Positive;
 public class Visit_DTO {
 
 	@NotNull(message = "Date is required")
-	private Date date;
+	private LocalDate date;
 
 	@NotBlank(message = "Complaints are required")
 	private String complaints;
@@ -109,12 +110,12 @@ public class Visit_DTO {
 	@Positive(message = "Patient ID must be a positive number")
 	private int patientid;
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(LocalDate date) {
+		this.date = LocalDate.now();
 	}
 
 	public String getComplaints() {

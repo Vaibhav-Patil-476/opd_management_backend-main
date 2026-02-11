@@ -1,5 +1,6 @@
 package com.OPD_Managemnet_System.OPD_ServicesIMPL;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,18 @@ public class Visit_ServiceIMPL implements Visit_Service {
 			throw new ResourceNotFoundException("Vist is not exist by this id" + id);
 		}
 
+	}
+	
+	@Override
+	public List<Visit> findByVisitDate(LocalDate visitDate) {
+
+		try {
+			return visit_repo.findByVisitDate(visitDate);
+		} catch (Exception e) {
+			throw new ResourceNotFoundException("Visist date not found");
+	}
+
+	
 	}
 
 }

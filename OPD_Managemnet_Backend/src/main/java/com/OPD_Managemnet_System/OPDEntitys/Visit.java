@@ -1,6 +1,7 @@
 package com.OPD_Managemnet_System.OPDEntitys;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,7 +28,7 @@ public class Visit {
 
 	private int id;
 
-	private Date date;
+	private LocalDate visitDate;
 
 	private String complaints;
 
@@ -99,6 +100,10 @@ public class Visit {
 	@JsonIgnoreProperties(value = "patientid", allowSetters = true)
 	private Patient patientid;
 
+	
+
+	
+
 	public int getId() {
 		return id;
 	}
@@ -107,12 +112,12 @@ public class Visit {
 		this.id = id;
 	}
 
-	public Date getDate() {
-		return date;
+	public LocalDate getVisitDate() {
+		return visitDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setVisitDate(LocalDate visitDate) {
+		this.visitDate = visitDate;
 	}
 
 	public String getComplaints() {
@@ -336,7 +341,7 @@ public class Visit {
 	}
 
 	public void setCreate_at(LocalDateTime create_at) {
-		this.create_at = LocalDateTime.now();
+		this.create_at = create_at;
 	}
 
 	public LocalDateTime getUpdate_at() {
@@ -344,15 +349,15 @@ public class Visit {
 	}
 
 	public void setUpdate_at(LocalDateTime update_at) {
-		this.update_at = LocalDateTime.now();
+		this.update_at = update_at;
 	}
 
 	public Doctor getDoctorid() {
 		return Doctorid;
 	}
 
-	public void setDoctorid(Doctor Doctorid) {
-		this.Doctorid = Doctorid;
+	public void setDoctorid(Doctor doctorid) {
+		Doctorid = doctorid;
 	}
 
 	public Patient getPatientid() {
@@ -363,15 +368,15 @@ public class Visit {
 		this.patientid = patientid;
 	}
 
-	public Visit(int id, Date date, String complaints, String diagnosis, String advice, String bp, String pulse,
-			String saturation, String temperature, String respiration_rate, String sugar, String fasting_sugar,
-			String pp_sugar, String random_sugar, String urea_creatinine, String past_history,
+	public Visit(int id, LocalDate visitDate, String complaints, String diagnosis, String advice, String bp,
+			String pulse, String saturation, String temperature, String respiration_rate, String sugar,
+			String fasting_sugar, String pp_sugar, String random_sugar, String urea_creatinine, String past_history,
 			String current_medication, String addition_notes, int weight, String edema, String pallor, String jaundice,
 			String cvs, String rs, String pa, String cns, String hb, String ecg, LocalDateTime followup_date,
-			LocalDateTime create_at, LocalDateTime update_at, Doctor Doctorid, Patient patientid) {
+			LocalDateTime create_at, LocalDateTime update_at, Doctor doctorid, Patient patientid) {
 		super();
 		this.id = id;
-		this.date = date;
+		this.visitDate = visitDate;
 		this.complaints = complaints;
 		this.diagnosis = diagnosis;
 		this.advice = advice;
@@ -401,14 +406,14 @@ public class Visit {
 		this.followup_date = followup_date;
 		this.create_at = create_at;
 		this.update_at = update_at;
-		this.Doctorid = Doctorid;
+		Doctorid = doctorid;
 		this.patientid = patientid;
 	}
 
 	@Override
 	public String toString() {
-		return "Visit [id=" + id + ", date=" + date + ", complaints=" + complaints + ", diagnosis=" + diagnosis
-				+ ", advice=" + advice + ", bp=" + bp + ", pulse=" + pulse + ", saturation=" + saturation
+		return "Visit [id=" + id + ", visitDate=" + visitDate + ", complaints=" + complaints + ", diagnosis="
+				+ diagnosis + ", advice=" + advice + ", bp=" + bp + ", pulse=" + pulse + ", saturation=" + saturation
 				+ ", temperature=" + temperature + ", respiration_rate=" + respiration_rate + ", sugar=" + sugar
 				+ ", fasting_sugar=" + fasting_sugar + ", pp_sugar=" + pp_sugar + ", random_sugar=" + random_sugar
 				+ ", urea_creatinine=" + urea_creatinine + ", past_history=" + past_history + ", current_medication="

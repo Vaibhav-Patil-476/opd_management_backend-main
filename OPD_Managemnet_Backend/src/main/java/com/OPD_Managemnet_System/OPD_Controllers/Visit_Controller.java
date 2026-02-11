@@ -1,5 +1,6 @@
 package com.OPD_Managemnet_System.OPD_Controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.OPD_Managemnet_System.OPDEntitys.Doctor;
 import com.OPD_Managemnet_System.OPDEntitys.Patient;
 import com.OPD_Managemnet_System.OPDEntitys.Visit;
+import com.OPD_Managemnet_System.OPDRepo.Visit_repo;
 import com.OPD_Managemnet_System.OPDServices.Doctor_Service;
 import com.OPD_Managemnet_System.OPDServices.Patient_Service;
 import com.OPD_Managemnet_System.OPDServices.Visit_Service;
@@ -39,6 +41,9 @@ public class Visit_Controller {
 
 	@Autowired
 	private Patient_Service patient_Service;
+	
+	@Autowired
+	private Visit_repo visit_repo;
 	// Used to fetch patient details
 
 	// ---------------------- SAVE PATIENT VISIT ----------------------
@@ -59,7 +64,7 @@ public class Visit_Controller {
 		visit.setCreate_at(visit_DTO.getCreate_at());
 		visit.setCurrent_medication(visit_DTO.getCurrent_medication());
 		visit.setCvs(visit_DTO.getCvs());
-		visit.setDate(visit_DTO.getDate());
+		visit.setVisitDate(LocalDate.now());
 		visit.setDiagnosis(visit_DTO.getDiagnosis());
 		visit.setEcg(visit_DTO.getEcg());
 		visit.setWeight(visit_DTO.getWeight());
@@ -151,7 +156,7 @@ public class Visit_Controller {
 		visit.setCreate_at(visit_DTO.getCreate_at());
 		visit.setCurrent_medication(visit_DTO.getCurrent_medication());
 		visit.setCvs(visit_DTO.getCvs());
-		visit.setDate(visit_DTO.getDate());
+		visit.setVisitDate(LocalDate.now());
 		visit.setDiagnosis(visit_DTO.getDiagnosis());
 		visit.setEcg(visit_DTO.getEcg());
 		visit.setWeight(visit_DTO.getWeight());
@@ -205,5 +210,21 @@ public class Visit_Controller {
 		visit_Service.deleteBYID(id);
 
 		return new ResponseEntity<>(HttpStatus.MOVED_PERMANENTLY);
+	}
+	
+	// ---------------------- Get Visit Date  ----------------------
+	
+	@GetMapping("/todaysVisite")
+	public ResponseEntity<List<Visit>> GetVisitDateByVisitid(){
+		
+		
+		
+		List<Visit> visit = visit_Service.findByVisitDate(LocalDate.now());
+		
+		if(visit==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(visit,HttpStatus.OK);
 	}
 }

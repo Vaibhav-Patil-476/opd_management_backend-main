@@ -1,5 +1,6 @@
 package com.OPD_Managemnet_System.OPDServices;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -17,4 +18,5 @@ public interface Visit_Service {
 	
 	void deleteBYID(int id);//user defined method for delete doctor data by there id
 
+	List<Visit> findByVisitDate(LocalDate visitDate);//Find and short date 
 }

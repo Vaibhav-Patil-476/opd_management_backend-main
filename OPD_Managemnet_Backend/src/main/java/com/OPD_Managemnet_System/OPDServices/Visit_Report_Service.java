@@ -1,10 +1,13 @@
 package com.OPD_Managemnet_System.OPDServices;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.core.io.Resource;
+
+import com.OPD_Managemnet_System.OPDEntitys.Visit;
 import com.OPD_Managemnet_System.OPDEntitys.Visit_Report;
 
 
@@ -21,4 +24,6 @@ public interface Visit_Report_Service {
 	
 
 	List<Visit_Report> GetVisitReportByVisitId(long visitid);
+	
+	
 }
