@@ -41,11 +41,9 @@ public class Doctor_DTO {
 	@NotBlank(message = "Status is required")
 	private String status;
 
-	// ❌ Do NOT validate dates in DTO (set in service)
-	@NotNull(message = "Created date is required")
 	private LocalDateTime created_at;
 	
-	@NotNull(message = "Updated date is required")
+
 	private LocalDateTime updated_at;
 
 	@NotBlank(message = "Qualification is required")

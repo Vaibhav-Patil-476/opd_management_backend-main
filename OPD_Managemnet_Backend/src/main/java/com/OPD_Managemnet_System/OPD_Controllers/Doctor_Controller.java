@@ -53,6 +53,7 @@ public class Doctor_Controller {
 		doctor.setMobileno(doctorDTO.getMobileno());
 		doctor.setAddress(doctorDTO.getAddress());
 		doctor.setEmail(doctorDTO.getEmail());
+		doctor.setOtpVerified(false);
 
 		// Encrypt password before saving
 		doctor.setPassword(encoderConfig.encode(doctorDTO.getPassword()));

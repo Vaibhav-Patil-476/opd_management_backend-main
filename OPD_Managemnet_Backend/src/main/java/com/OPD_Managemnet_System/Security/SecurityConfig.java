@@ -38,7 +38,9 @@ public class SecurityConfig {
 						"/auth/login/reception", // Allow reception login
 						"/auth/login/admin", // Allow admin login
 						"/api/doctor/register",// Allow doctor registration
-						"/api/email/send"//allow to send user 
+						"/auth/email/send",//allow to send user 
+						"/auth/otp-verify",
+						"/auth/forgot-password"
 				).permitAll() // Permit these endpoints
 						.anyRequest().authenticated() // All other requests need authentication
 				)

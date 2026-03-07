@@ -52,18 +52,13 @@ public class Doctor {
 
 	private String qualification;
 	
+	private Long otp;
+	
+	private boolean isOtpVerified;
+	
 	// Define role 
 	@Enumerated(EnumType.STRING)
 	private Role Role;
-
-	//getter setter 
-	public Role getRole() {
-		return Role;
-	}
-
-	public void setRole(Role role) {
-		Role = role.DOCTOR;
-	}
 
 	public int getId() {
 		return id;
@@ -87,6 +82,14 @@ public class Doctor {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getSpecialization() {
@@ -113,19 +116,11 @@ public class Doctor {
 		this.address = address;
 	}
 
-	public String getQualification() {
-		return qualification;
-	}
-
-	public void setQualification(String qualification) {
-		this.qualification = qualification;
-	}
-
-	public long getMobileno() {
+	public Long getMobileno() {
 		return mobileno;
 	}
 
-	public void setMobileno(long mobileno) {
+	public void setMobileno(Long mobileno) {
 		this.mobileno = mobileno;
 	}
 
@@ -150,7 +145,7 @@ public class Doctor {
 	}
 
 	public void setCreated_at(LocalDateTime created_at) {
-		this.created_at = LocalDateTime.now();
+		this.created_at = created_at;
 	}
 
 	public LocalDateTime getUpdated_at() {
@@ -158,24 +153,50 @@ public class Doctor {
 	}
 
 	public void setUpdated_at(LocalDateTime updated_at) {
-		this.updated_at = LocalDateTime.now();
+		this.updated_at = updated_at;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getQualification() {
+		return qualification;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
 	}
 
-	public Doctor(int id, String name, String password, String specialization, String clinic_name, String address,
-			long mobileno, String token, String status, LocalDateTime created_at, LocalDateTime updated_at,
-			String email, String qualification) {
+	public Long getOtp() {
+		return otp;
+	}
+
+	public void setOtp(Long otp) {
+		this.otp = otp;
+	}
+
+	public boolean isOtpVerified() {
+		return isOtpVerified;
+	}
+
+	public void setOtpVerified(boolean isOtpVerified) {
+		this.isOtpVerified = isOtpVerified;
+	}
+
+	public Role getRole() {
+		return Role;
+	}
+
+	public void setRole(Role role) {
+		Role = role;
+	}
+
+	public Doctor(int id, String name, String password, String email, String specialization, String clinic_name,
+			String address, Long mobileno, String token, String status, LocalDateTime created_at,
+			LocalDateTime updated_at, String qualification, Long otp, boolean isOtpVerified,
+			com.OPD_Managemnet_System.OPDEntitys.Role role) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.password = password;
+		this.email = email;
 		this.specialization = specialization;
 		this.clinic_name = clinic_name;
 		this.address = address;
@@ -184,8 +205,10 @@ public class Doctor {
 		this.status = status;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
-		this.email = email;
 		this.qualification = qualification;
+		this.otp = otp;
+		this.isOtpVerified = isOtpVerified;
+		Role = role;
 	}
 
 	@Override
@@ -193,7 +216,8 @@ public class Doctor {
 		return "Doctor [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email
 				+ ", specialization=" + specialization + ", clinic_name=" + clinic_name + ", address=" + address
 				+ ", mobileno=" + mobileno + ", token=" + token + ", status=" + status + ", created_at=" + created_at
-				+ ", updated_at=" + updated_at + ", qualification=" + qualification + "]";
+				+ ", updated_at=" + updated_at + ", qualification=" + qualification + ", otp=" + otp
+				+ ", isOtpVerified=" + isOtpVerified + ", Role=" + Role + "]";
 	}
 
 	public Doctor() {
@@ -201,4 +225,6 @@ public class Doctor {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
 }
