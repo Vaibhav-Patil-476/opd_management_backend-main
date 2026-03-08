@@ -1,6 +1,6 @@
 package com.OPD_Managemnet_System.OPD_DTOs;
 
-public class EmailSendOtpDTO {
+public class EmailSendDTO {
 
 	private String email;
 

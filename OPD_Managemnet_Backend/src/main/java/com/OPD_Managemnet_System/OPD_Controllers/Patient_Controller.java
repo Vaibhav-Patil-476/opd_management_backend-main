@@ -55,10 +55,11 @@ public class Patient_Controller {
 		patient.setSmoking(patient_Dto.getSmoking());
 		patient.setCreated_at(patient_Dto.getCreated_at());
 		patient.setHeight(patient_Dto.getHeight());
+		patient.setOtpVerified(false);
 
 		// Fetch doctor using doctor ID
 		Doctor docter = docter_Service.getBYID(patient_Dto.getDoctorid());
-		patient.setDocterid(docter);
+		patient.setDoctorid(docter);
 
 		// Save patient record
 		Patient SavePatient = patient_Service.save(patient);
@@ -123,7 +124,7 @@ public class Patient_Controller {
 
 		// Update doctor reference
 		Doctor docter = docter_Service.getBYID(patient_Dto.getDoctorid());
-		patient.setDocterid(docter);
+		patient.setDoctorid(docter);
 
 		// Save updated patient
 		Patient SavePatient = patient_Service.save(patient);

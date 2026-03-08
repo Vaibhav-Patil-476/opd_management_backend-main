@@ -36,7 +36,7 @@ public class Doctor_DTO {
 	@Digits(integer = 10, fraction = 0, message = "Mobile number must be 10 digits")
 	private Long mobileno;
 
-	String token;
+	private String token;
 
 	@NotBlank(message = "Status is required")
 	private String status;

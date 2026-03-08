@@ -36,6 +36,12 @@ public class Reception {
 	private LocalDateTime updated_at;
 	private String password;
 	private String shift;
+	
+	private Long otp;
+	
+	private boolean isOtpVerified;
+	
+	private LocalDateTime localdatetime;
 
 	@Enumerated(EnumType.STRING)
 	private Role Role;
@@ -45,35 +51,6 @@ public class Reception {
 	@JoinColumn(name = "doctorid")
 	@JsonIgnoreProperties(value = "doctorid", allowGetters = true)
 	private Doctor doctorid;
-
-	// Parameters constructor
-	public Reception(int id, String name, String email, String address, long mobileNo, String token,
-			LocalDateTime created_at, LocalDateTime updated_at, Doctor doctorid, String password) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.address = address;
-		this.mobileNo = mobileNo;
-		this.token = token;
-		this.created_at = created_at;
-		this.updated_at = updated_at;
-		this.doctorid = doctorid;
-		this.password = password;
-	}
-	// reception getter and Setter
-	public String getShift() {
-		return shift;
-	}
-
-	public void setShift(String shift) {
-		this.shift = shift;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
 
 	public int getId() {
 		return id;
@@ -139,6 +116,46 @@ public class Reception {
 		this.updated_at = updated_at;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getShift() {
+		return shift;
+	}
+
+	public void setShift(String shift) {
+		this.shift = shift;
+	}
+
+	public Long getOtp() {
+		return otp;
+	}
+
+	public void setOtp(Long otp) {
+		this.otp = otp;
+	}
+
+	public boolean isOtpVerified() {
+		return isOtpVerified;
+	}
+
+	public void setOtpVerified(boolean isOtpVerified) {
+		this.isOtpVerified = isOtpVerified;
+	}
+
+	public LocalDateTime getLocaldatetime() {
+		return localdatetime;
+	}
+
+	public void setLocaldatetime(LocalDateTime localdatetime) {
+		this.localdatetime = localdatetime;
+	}
+
 	public Role getRole() {
 		return Role;
 	}
@@ -155,22 +172,41 @@ public class Reception {
 		this.doctorid = doctorid;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	// default constructor
-	public Reception() {
+	public Reception(int id, String name, String email, String address, long mobileNo, String token,
+			LocalDateTime created_at, LocalDateTime updated_at, String password, String shift, Long otp,
+			boolean isOtpVerified, LocalDateTime localdatetime, com.OPD_Managemnet_System.OPDEntitys.Role role,
+			Doctor doctorid) {
 		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.address = address;
+		this.mobileNo = mobileNo;
+		this.token = token;
+		this.created_at = created_at;
+		this.updated_at = updated_at;
+		this.password = password;
+		this.shift = shift;
+		this.otp = otp;
+		this.isOtpVerified = isOtpVerified;
+		this.localdatetime = localdatetime;
+		Role = role;
+		this.doctorid = doctorid;
 	}
-
-	// toStrign Method
 
 	@Override
 	public String toString() {
 		return "Reception [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address + ", mobileNo="
 				+ mobileNo + ", token=" + token + ", created_at=" + created_at + ", updated_at=" + updated_at
-				+ ", password=" + password + ", Role=" + Role + ", doctorid=" + doctorid + "]";
+				+ ", password=" + password + ", shift=" + shift + ", otp=" + otp + ", isOtpVerified=" + isOtpVerified
+				+ ", localdatetime=" + localdatetime + ", Role=" + Role + ", doctorid=" + doctorid + "]";
 	}
+
+	public Reception() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
 
 }

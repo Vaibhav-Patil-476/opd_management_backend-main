@@ -34,13 +34,19 @@ public class SecurityConfig {
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthEntryPoint))
 
 				// Define URL access rules
-				.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/login/doctor", // Allow doctor login
+				.authorizeHttpRequests(auth -> auth.requestMatchers(
+						"/auth/login/doctor", // Allow doctor login
 						"/auth/login/reception", // Allow reception login
 						"/auth/login/admin", // Allow admin login
 						"/api/doctor/register",// Allow doctor registration
-						"/auth/email/send",//allow to send user 
-						"/auth/otp-verify",
-						"/auth/forgot-password"
+						"/auth/doctor/email-send",
+						"/auth/reception/email-send",
+						
+						"/auth/doctor/otp-verify",
+						"/auth/reception/otp-verify",
+						
+						"/auth/doctor/forgot-password",
+						"/auth/reception/forgot-password"
 				).permitAll() // Permit these endpoints
 						.anyRequest().authenticated() // All other requests need authentication
 				)

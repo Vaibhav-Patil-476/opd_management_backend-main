@@ -15,7 +15,7 @@ public class Reception_DTO {
 	@NotBlank(message = "Name is required")
 	private String name;
 
-	@NotBlank(message = "Name is doctorid")
+	@NotNull(message = "Name is doctorid")
 	@Positive(message = "Doctor ID must be a positive number")
 	private int doctorid;
 

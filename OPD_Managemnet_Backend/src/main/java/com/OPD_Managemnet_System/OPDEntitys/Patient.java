@@ -50,6 +50,12 @@ public class Patient {
 	private String tobacoo;
 
 	private LocalDateTime created_at;
+	
+	private Long otp;
+	
+	private boolean isOtpVerified;
+	
+	private LocalDateTime localdatetime;
 
 	// Apply many to one Relationship between Patient and Doctor
 	@ManyToOne
@@ -150,20 +156,44 @@ public class Patient {
 	}
 
 	public void setCreated_at(LocalDateTime created_at) {
-		this.created_at = LocalDateTime.now();
+		this.created_at = created_at;
+	}
+
+	public Long getOtp() {
+		return otp;
+	}
+
+	public void setOtp(Long otp) {
+		this.otp = otp;
+	}
+
+	public boolean isOtpVerified() {
+		return isOtpVerified;
+	}
+
+	public void setOtpVerified(boolean isOtpVerified) {
+		this.isOtpVerified = isOtpVerified;
+	}
+
+	public LocalDateTime getLocaldatetime() {
+		return localdatetime;
+	}
+
+	public void setLocaldatetime(LocalDateTime localdatetime) {
+		this.localdatetime = localdatetime;
 	}
 
 	public Doctor getDoctorid() {
 		return doctorid;
 	}
 
-	public void setDocterid(Doctor docterid) {
-		this.doctorid = docterid;
+	public void setDoctorid(Doctor doctorid) {
+		this.doctorid = doctorid;
 	}
 
 	public Patient(int id, String patient_name, int age, String gender, long mibileno, String address,
 			String blood_group, String height, String smoking, String alcohol, String tobacoo, LocalDateTime created_at,
-			Doctor docterid) {
+			Long otp, boolean isOtpVerified, LocalDateTime localdatetime, Doctor doctorid) {
 		super();
 		this.id = id;
 		this.patient_name = patient_name;
@@ -177,7 +207,10 @@ public class Patient {
 		this.alcohol = alcohol;
 		this.tobacoo = tobacoo;
 		this.created_at = created_at;
-		this.doctorid = docterid;
+		this.otp = otp;
+		this.isOtpVerified = isOtpVerified;
+		this.localdatetime = localdatetime;
+		this.doctorid = doctorid;
 	}
 
 	@Override
@@ -185,12 +218,15 @@ public class Patient {
 		return "Patient [id=" + id + ", patient_name=" + patient_name + ", age=" + age + ", gender=" + gender
 				+ ", mibileno=" + mibileno + ", address=" + address + ", blood_group=" + blood_group + ", height="
 				+ height + ", smoking=" + smoking + ", alcohol=" + alcohol + ", tobacoo=" + tobacoo + ", created_at="
-				+ created_at + ", docterid=" + doctorid + "]";
+				+ created_at + ", otp=" + otp + ", isOtpVerified=" + isOtpVerified + ", localdatetime=" + localdatetime
+				+ ", doctorid=" + doctorid + "]";
 	}
 
 	public Patient() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 }

@@ -5,5 +5,7 @@ import com.OPD_Managemnet_System.Response.EmailResponce;
 
 public interface VerifyEmailOtpService {
 
-	EmailResponce EmailOtpVerify(VerifyEmailOTPDto verifyEmailOTPDto);
+	EmailResponce DoctorEmailOtpVerify(VerifyEmailOTPDto verifyEmailOTPDto);
+	
+	EmailResponce ReceptionEmailOtpVerify(VerifyEmailOTPDto verifyEmailOTPDto);
 }

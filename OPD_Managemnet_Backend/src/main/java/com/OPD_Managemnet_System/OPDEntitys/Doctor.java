@@ -56,6 +56,8 @@ public class Doctor {
 	
 	private boolean isOtpVerified;
 	
+	private LocalDateTime localdatetime;
+	
 	// Define role 
 	@Enumerated(EnumType.STRING)
 	private Role Role;
@@ -180,6 +182,14 @@ public class Doctor {
 		this.isOtpVerified = isOtpVerified;
 	}
 
+	public LocalDateTime getLocaldatetime() {
+		return localdatetime;
+	}
+
+	public void setLocaldatetime(LocalDateTime localdatetime) {
+		this.localdatetime = localdatetime;
+	}
+
 	public Role getRole() {
 		return Role;
 	}
@@ -191,7 +201,7 @@ public class Doctor {
 	public Doctor(int id, String name, String password, String email, String specialization, String clinic_name,
 			String address, Long mobileno, String token, String status, LocalDateTime created_at,
 			LocalDateTime updated_at, String qualification, Long otp, boolean isOtpVerified,
-			com.OPD_Managemnet_System.OPDEntitys.Role role) {
+			LocalDateTime localdatetime, com.OPD_Managemnet_System.OPDEntitys.Role role) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -208,6 +218,7 @@ public class Doctor {
 		this.qualification = qualification;
 		this.otp = otp;
 		this.isOtpVerified = isOtpVerified;
+		this.localdatetime = localdatetime;
 		Role = role;
 	}
 
@@ -217,7 +228,7 @@ public class Doctor {
 				+ ", specialization=" + specialization + ", clinic_name=" + clinic_name + ", address=" + address
 				+ ", mobileno=" + mobileno + ", token=" + token + ", status=" + status + ", created_at=" + created_at
 				+ ", updated_at=" + updated_at + ", qualification=" + qualification + ", otp=" + otp
-				+ ", isOtpVerified=" + isOtpVerified + ", Role=" + Role + "]";
+				+ ", isOtpVerified=" + isOtpVerified + ", localdatetime=" + localdatetime + ", Role=" + Role + "]";
 	}
 
 	public Doctor() {

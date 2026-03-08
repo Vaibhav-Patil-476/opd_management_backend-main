@@ -58,6 +58,7 @@ public class Reception_Controller {
 		reception.setToken(reception_DTO.getToken());
 		reception.setCreated_at(reception_DTO.getCreated_at());
 		reception.setUpdated_at(reception_DTO.getUpdated_at());
+		reception.setOtpVerified(false);
 
 		// Assign RECEPTION role
 		reception.setRole(Role.RECEPTION);
